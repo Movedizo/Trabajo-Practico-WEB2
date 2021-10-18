@@ -27,8 +27,10 @@
             <td>{$reacondicionado->ram}</td>
             <td>{$reacondicionado->bateria}</td>
             <td>{$reacondicionado->stock}</td>
-            <td> <a href="editar/{$reacondicionado->id_reacondicionado}">Editar</a></button></td>
-            <td> <a href="eliminar/{$reacondicionado->id_reacondicionado}">Eliminar</a></button></td>                  
+            {if $logueado == 1}    
+                <td> <a href="editar/{$reacondicionado->id_reacondicionado}">Editar</a></button></td>
+                <td> <a href="eliminar/{$reacondicionado->id_reacondicionado}">Eliminar</a></button></td>                  
+            {/if}
         </tr>
         {/foreach}  
       
