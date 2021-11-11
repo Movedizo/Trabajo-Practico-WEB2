@@ -11,15 +11,31 @@ class ApiCelularesController{
 
     function __construct(){
 
-        $this->modelMarcas = new MarcasModel();
+        $this->marcasModel = new MarcasModel();
         $this->model = new ReacondicionadoModel();
         $this->view = new ApiView();
     }
 
     function verMarcas(){
-        $marcas = $this->modelMarcas->getMarcas();
+        $marcas = $this->marcasModel->getMarcas();
         return $this->view->response($marcas, 200);
     } 
+
+    function verReacondicionados(){
+        $reacondicionados = $this->model->getReacondicionadoMultitabla();
+        return $this->view->response($reacondicionados, 200);
+    } 
+
+    function verReacondicionado($params = null){
+        $idReacondicionado = $params[":ID"];
+        $reacondicionado = $this->modelMarcas->getReacondicionado($idReacondicionado);
+        if ($reacondicionado){
+            return $this->view->response($reacondicionado, 200);
+        }
+        else{
+            return $this->view->response("El celular con id=$idReacondicionado no existe", 404);
+        }
+    }
 
     function verMarca($params = null){
         $idMarca = $params[":ID"];
@@ -45,9 +61,9 @@ class ApiCelularesController{
     }
 
     function createReacondicionado($params = null) {
-
+        $idReacondicionado = $params[":ID"];
         $body = $this->getBody();
-        $id = $this->model->createReacondicionado($body->marca, $body->modelo, $body->precio, $body->codigo, $body->almacenamiento, $body->pantalla, $body->ram, $body->bateria, $body->stock);
+        $id = $this->model->createReacondicionado($idReacondicionado, $body->marca, $body->modelo, $body->precio, $body->codigo, $body->almacenamiento, $body->pantalla, $body->ram, $body->bateria, $body->stock);
         if ($id != 0) {
             $this->view->response("El celular se insertó con el id=$id", 200);
         } else {

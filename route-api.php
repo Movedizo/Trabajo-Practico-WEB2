@@ -11,10 +11,10 @@ $router->addRoute('reacondicionados', 'GET', 'ApiCelularesController', 'verReaco
 $router->addRoute('reacondicionados', 'GET', 'ApiCelularesController', 'modelo');
 $router->addRoute('reacondicionados', 'GET', 'ApiCelularesController', 'caracteristicas');
 $router->addRoute('reacondicionados', 'GET', 'ApiCelularesController', 'almacenamiento');
-$router->addRoute('marcas/:ID', 'GET', 'ApiCelularesController', 'marca');
+$router->addRoute('marcas/:ID', 'GET', 'ApiCelularesController', 'marcas');
 $router->addRoute('reacondicionados/:ID', 'GET', 'ApiCelularesController', 'verReacondicionado');
 $router->addRoute('reacondicionados/:ID', 'DELETE', 'ApiCelularesController', 'eliminar');
-$router->addRoute('reacondicionados', 'POST', 'ApiCelularesController', 'createReacondicionados');
+$router->addRoute('reacondicionados', 'POST', 'ApiCelularesController', 'createReacondicionado');
 $router->addRoute('reacondicionados/:ID', 'PUT', 'ApiCelularesController', 'updateReacondicionado');
 
 $router->addRoute('users/token', 'GET', 'ApiUserController', 'obtenerToken');
