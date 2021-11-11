@@ -6,11 +6,12 @@ require_once 'Controller/ApiUserController.php';
 
 $router = new Router();
 
-$router->addRoute('marcas', 'GET', 'ApiCelularesController', 'marcas');
+$router->addRoute('marca', 'GET', 'ApiCelularesController', 'marca');
 $router->addRoute('reacondicionados', 'GET', 'ApiCelularesController', 'verReacondicionados');
 $router->addRoute('reacondicionados', 'GET', 'ApiCelularesController', 'modelo');
 $router->addRoute('reacondicionados', 'GET', 'ApiCelularesController', 'caracteristicas');
 $router->addRoute('reacondicionados', 'GET', 'ApiCelularesController', 'almacenamiento');
+$router->addRoute('reacondicionados', 'GET', 'ApiCelularesController', 'ram');
 $router->addRoute('marcas/:ID', 'GET', 'ApiCelularesController', 'marcas');
 $router->addRoute('reacondicionados/:ID', 'GET', 'ApiCelularesController', 'verReacondicionado');
 $router->addRoute('reacondicionados/:ID', 'DELETE', 'ApiCelularesController', 'eliminar');

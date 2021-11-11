@@ -37,11 +37,12 @@ class ApiCelularesController{
         }
     }
 
-    function verMarca($params = null){
+    function verModeloPorMarca($params = null){
         $idMarca = $params[":ID"];
         $marca = $this->modelMarcas->getMarca($idMarca);
+        $modeloPorMarca = $this->model->getModelosPorMarca($idMarca);
         if ($marca){
-            return $this->view->response($marca, 200);
+            return $this->view->response($marca, $modeloPorMarca, 200);
         }
         else{
             return $this->view->response("La marca con id=$idMarca no existe", 404);
