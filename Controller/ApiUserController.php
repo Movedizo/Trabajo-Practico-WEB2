@@ -1,7 +1,6 @@
 <?php
 
 require_once "./View/ApiView.php";
-require_once "./Helpers/AuthApiHelper.php";
 
 class ApiUserController{
 

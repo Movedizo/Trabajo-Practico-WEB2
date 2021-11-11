@@ -1,7 +1,7 @@
 <?php
 
     require_once 'Controller/ReacondicionadosController.php';
-    require_once 'Controller/IngresoController.php';
+    require_once 'Controller/LoginController.php';
     require_once 'Controller/MarcasController.php';
 
     define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');   

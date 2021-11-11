@@ -10,14 +10,20 @@ class ApiCelularesController{
     private $view;
 
     function __construct(){
-        $this->model = new MarcasModel();
+
+        $this->modelMarcas = new MarcasModel();
         $this->model = new ReacondicionadoModel();
         $this->view = new ApiView();
     }
 
+    function verMarcas(){
+        $marcas = $this->modelMarcas->getMarcas();
+        return $this->view->response($marcas, 200);
+    } 
+
     function verMarca($params = null){
         $idMarca = $params[":ID"];
-        $marca = $this->model->getMarca($idMarca);
+        $marca = $this->modelMarcas->getMarca($idMarca);
         if ($marca){
             return $this->view->response($marca, 200);
         }
@@ -28,7 +34,7 @@ class ApiCelularesController{
  
     function eliminar($params = null) {
         $idReacondicionado = $params[":ID"];
-        $reacondicionado = $this->model->getReacondicionados($idRecondicionado);
+        $reacondicionado = $this->model->getReacondicionado($idReacondicionado);
 
         if ($reacondicionado) {
             $this->model->deleteReacondicionadoFromDB($idReacondicionado);
@@ -55,7 +61,7 @@ class ApiCelularesController{
         $reacondicionado = $this->model->getReacondicionado($idReacondicionado);
 
         if ($reacondicionado) {
-            $this->model->update($idReacondicionado, $body->marca, $body->modelo, $body->precio, $body->codigo, $body->almacenamiento, $body->pantalla, $body->ram, $body->bateria, $body->stock);
+            $this->model->updateReacondicionadoFromDB($idReacondicionado, $body->marca, $body->modelo, $body->precio, $body->codigo, $body->almacenamiento, $body->pantalla, $body->ram, $body->bateria, $body->stock);
             $this->view->response("El celular se actualizó correctamente", 200);
         } else {
             return $this->view->response("El celular con el id=$idReacondicionado no existe", 404);
@@ -66,26 +72,5 @@ class ApiCelularesController{
         $bodyString = file_get_contents("php://input");
         return json_decode($bodyString);
     }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
