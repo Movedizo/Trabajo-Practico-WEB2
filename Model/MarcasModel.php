@@ -14,4 +14,16 @@ class MarcasModel{
         $marcas = $sentencia->fetchAll(PDO::FETCH_OBJ);
         return $marcas;
     }
+
+    function getMarca($id){
+        $sentencia = $this->db->prepare( "SELECT * FROM `marcas` WHERE id_marca = ?" );
+        $sentencia->execute(array($id));
+        $marca = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $marca;
+    }
+
+
+
+
+
 }
