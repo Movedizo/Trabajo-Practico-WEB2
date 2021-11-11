@@ -30,7 +30,6 @@
         case 'admin': 
             $ingresoController->ingresoAdmin();  
             break;
-        
         case 'logout': 
             $ingresoController->logout(); 
             break; 
