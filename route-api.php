@@ -6,7 +6,7 @@ require_once 'Controller/ApiUserController.php';
 
 $router = new Router();
 
-$router->addRoute('marca', 'GET', 'ApiCelularesController', 'marca');
+$router->addRoute('marca', 'GET', 'ApiCelularesController', 'verMarcas');
 $router->addRoute('reacondicionados', 'GET', 'ApiCelularesController', 'verReacondicionados');
 $router->addRoute('reacondicionados', 'GET', 'ApiCelularesController', 'modelo');
 $router->addRoute('reacondicionados', 'GET', 'ApiCelularesController', 'caracteristicas');
