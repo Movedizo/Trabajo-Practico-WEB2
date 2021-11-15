@@ -32,9 +32,29 @@
                 <td> <a href="eliminar/{$reacondicionado->id_reacondicionado}">Eliminar</a></button></td>                  
             {/if}
         </tr>
-        {/foreach}  
-      
+        
+    {/foreach}  
+    
     </table> 
 </div>
 
+{include file="templates/coments.tpl"}
+
+<p id="idComent" value="{$reacondicionado->id_reacondicionado}"></p>
+
+<h2>Agrega un Comentario</h2>
+            <form class="form-alta" action="createComent/{$reacondicionado->id_reacondicionado}" method="POST">
+                <textarea placeholder="Comentario" type="text" name="coment" id="coment"> </textarea>
+                <select id="puntaje">
+                <option value="1"> 1</option>
+                <option value="2"> 2</option>
+                <option value="3"> 3</option>
+                <option value="4"> 4</option>
+                <option value="5"> 5</option>
+                </select>
+                <input type="submit" class="btn btn-primary" value="Guardar">
+            </form>
+        </div>
+
+     
 {include file='templates/footer.tpl'}

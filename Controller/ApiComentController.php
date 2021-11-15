@@ -32,4 +32,14 @@ class ApiComentController{
             else return $this->view->response("Sin Comentarios", 400);
         }
     }
+
+    function addComents(){
+        if(isset($comentario)&&($puntaje)){
+            $fecha = date("Y-m-d");
+            $this->model->addComents($id_usuario, $id_comentario, $id_reacondicionado, $comentario, $puntaje, $fecha)
+            
+
+        }
+
+    }
 }

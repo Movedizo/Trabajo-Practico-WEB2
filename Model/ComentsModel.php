@@ -9,17 +9,24 @@ class ComentsModel{
     }
 
     function getComent($idComent){
-        $sentencia = $this->db->prepare( "SELECT * FROM comentarios WHERE id_comentario= ?" );
+        $sentencia = $this->db->prepare( "SELECT * FROM comentarios WHERE id_reacondicionado= ?" );
         $sentencia->execute(array($idComent));
         $coment = $sentencia->fetch(PDO::FETCH_OBJ);
         return $coment;
     }
 
     function getComents(){
-        $sentencia = $this->db->prepare( "SELECT * FROM comentarios");
+        $sentencia = $this->db->prepare( "SELECT comentario, fecha, puntaje FROM comentarios");
         $sentencia->execute();
         $coments = $sentencia->fetchAll(PDO::FETCH_OBJ);
         return $coments;
     }
+
+    function addComents($id_usuario, $id_comentario, $id_reacondicionado, $comentario, $puntaje, $fecha){
+        $sentencia = $this->db->prepare("INSERT INTO comentarios(id_usuario, id_comentario, id_reacondicionado, comentario, puntaje, fecha) VALUES(?,?,?,?,?,?) ")
+        $sentencia->execute(array($id_usuario, $id_comentario, $id_reacondicionado, $comentario, $puntaje, $fecha));
+        
+    }
+
 
 }

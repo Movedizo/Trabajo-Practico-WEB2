@@ -10,8 +10,8 @@ $router = new Router();
 
 $router->addRoute('marca', 'GET', 'ApiCelularesController', 'verMarcas'); //anda
 $router->addRoute('reacondicionados', 'GET', 'ApiCelularesController', 'verReacondicionados'); //anda 
-$router->addRoute('comentarios' , 'GET', 'ApiComentController' ,'getComents');
-$router->addRoute('comentarios/:ID', 'GET', 'ApiComentController' ,'getComents');
+$router->addRoute('comentarios' , 'GET', 'ApiComentController' ,'getComents');  //anda 
+$router->addRoute('comentarios/:ID', 'GET', 'ApiComentController' ,'getComents');// anda
 
 $router->addRoute('users/token', 'GET', 'ApiUserController', 'obtenerToken');
 $router->addRoute('users/:ID', 'GET', 'ApiUserController', 'obtenerUsuario');
