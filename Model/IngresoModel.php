@@ -13,4 +13,15 @@ class IngresoModel{
         $query->execute([$usuario]);
         return $query->fetch(PDO::FETCH_OBJ);
     }
+
+    function getUsser(){
+        $query = $this->db->prepare('SELECT * FROM usuario');
+        $query->execute();
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
+    function createUsser($userEmail,$userPassword){
+            $sentencia = $this->db->prepare('INSERT INTO usuarios (usuario, password) VALUES (? , ?)');
+            $sentencia->execute([$userEmail,$userPassword]); 
+        
+}
 }

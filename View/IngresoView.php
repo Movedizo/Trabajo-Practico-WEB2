@@ -22,4 +22,8 @@ class IngresoView{
     function showHome(){
         header("Location: ".BASE_URL."home");
     }
+    function showCreateUsser(){
+        $this->smarty->display('templates/registro.tpl');
+
+    }
 }

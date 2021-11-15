@@ -27,6 +27,9 @@
         case 'usuario': 
             $reacondicionadosController->verUsuario(); 
             break;
+        case 'createUsser':
+            $ingresoController->createUsser();
+            break;
         case 'admin': 
             $ingresoController->ingresoAdmin();  
             break;

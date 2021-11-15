@@ -1,12 +1,13 @@
 {include file='templates/header.tpl'}
 
+
 <div>
-    <table class="table">
-        <tr>
-            <td>Marca</td>
-            <td>Modelo</td>
-            <td>Precio</td>
-            <td>Codigo</td>
+<table class="table">
+<tr>
+<td>Marca</td>
+<td>Modelo</td>
+<td>Precio</td>
+<td>Codigo</td>
             <td>Almacenamiento</td>
             <td>Tamaño de pantalla</td>
             <td>Velocidad</td>
@@ -14,10 +15,10 @@
             <td>Stock</td>  
             <td ><a href="listaAdmin">Inicio</a></td>
             <td><a href="logout">Salir</a></td>
-        </tr>
-
-        {foreach from=$reacondicionados item=$reacondicionado}
-        <tr>
+            </tr>
+            
+            {foreach from=$reacondicionados item=$reacondicionado}
+                <tr>
             <td>{$reacondicionado->marca}</td>
             <td>{$reacondicionado->modelo}</td>
             <td>{$reacondicionado->precio}</td>
@@ -40,21 +41,21 @@
 
 {include file="templates/coments.tpl"}
 
-<p id="idComent" value="{$reacondicionado->id_reacondicionado}"></p>
 
 <h2>Agrega un Comentario</h2>
-            <form class="form-alta" action="createComent/{$reacondicionado->id_reacondicionado}" method="POST">
-                <textarea placeholder="Comentario" type="text" name="coment" id="coment"> </textarea>
-                <select id="puntaje">
+<form class="form-alta" action="" method="POST">
+    <input placeholder="Comentario" type="text" name="coment" id="coment">
+    <p> Puntaje <select id="puntaje"></p>
                 <option value="1"> 1</option>
                 <option value="2"> 2</option>
                 <option value="3"> 3</option>
                 <option value="4"> 4</option>
                 <option value="5"> 5</option>
                 </select>
-                <input type="submit" class="btn btn-primary" value="Guardar">
-            </form>
+                <button id="btn-coment" type="submit" class="btn btn-primary">Guardar </button>
+                </form>
         </div>
+        
+<p id="idComent" value="{$reacondicionado->id_reacondicionado}"></p>
 
-     
 {include file='templates/footer.tpl'}
