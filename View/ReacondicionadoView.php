@@ -20,9 +20,10 @@ class ReacondicionadoView {
     }
 
     function verAdmin($logueado){
-       if($logueado == 1){
-        $this->smarty->display('templates/admin.tpl');
-             }
+        $this->smarty->assign('logueado', $logueado);
+        if($logueado == 1){
+            $this->smarty->display('templates/admin.tpl');
+            }
        else { $this->smarty->display('templates/usuario.tpl');
             }
     }

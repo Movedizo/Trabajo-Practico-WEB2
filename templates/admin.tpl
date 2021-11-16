@@ -11,7 +11,9 @@
         <li><a href="agregar/">Agregar</a></li>
     </ul>  
 </nav>
-
+{if $logueado == 1 }
+{/if}
+<a href="usuarios"> Usuarios</a>
 <a href="home"> Volver</a>
 <a href="logout">Logout</a>
 

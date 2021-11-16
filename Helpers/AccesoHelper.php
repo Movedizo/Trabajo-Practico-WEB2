@@ -7,7 +7,7 @@ class AccesoHelper{
     if(!isset($_SESSION["usuario"])){
         $logueado = 0;
         }
-    else {$logueado = 1;
+    else {$logueado = $_SESSION['rol'];
         }
     return $logueado;
     }

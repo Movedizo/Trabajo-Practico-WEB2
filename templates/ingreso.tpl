@@ -7,7 +7,7 @@
             <input placeholder="password" type="password"  name="password" id="password" required>
             <input type="submit" class="btn btn-primary" value="Ingresar">
         </form>
-    <a href="createUsser">Crear usuario</a>
+    <a href="registro">Crear usuario</a>
         </div>
 
 <h2 class="">{$error}<h2>

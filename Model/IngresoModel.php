@@ -17,11 +17,16 @@ class IngresoModel{
     function getUsser(){
         $query = $this->db->prepare('SELECT * FROM usuario');
         $query->execute();
-        return $query->fetch(PDO::FETCH_OBJ);
+        return $query->fetchAll(PDO::FETCH_OBJ);
     }
     function createUsser($userEmail,$userPassword){
-            $sentencia = $this->db->prepare('INSERT INTO usuarios (usuario, password) VALUES (? , ?)');
+            $sentencia = $this->db->prepare('INSERT INTO usuario (usuario, password) VALUES (? , ?)');
             $sentencia->execute([$userEmail,$userPassword]); 
         
 }
+    function updateUsuarioDB($idUsuario,$rol){
+        $sentencia = $this->db->prepare("UPDATE usuario SET rol =? WHERE id=? ");
+        $sentencia->execute(array($rol, $idUsuario));
+
+    }
 }

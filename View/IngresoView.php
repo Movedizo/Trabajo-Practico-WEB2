@@ -26,4 +26,11 @@ class IngresoView{
         $this->smarty->display('templates/registro.tpl');
 
     }
+    
+    function showUsuarios($usuarios, $logueado){
+        $this->smarty->assign('logueado', $logueado);     
+        $this->smarty->assign('usuarios', $usuarios);     
+        $this->smarty->display('templates/usuarios.tpl');
+    }
+
 }

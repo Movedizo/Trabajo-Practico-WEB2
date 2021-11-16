@@ -2,15 +2,20 @@
 
 require_once "./Model/IngresoModel.php";
 require_once "./View/IngresoView.php";
+require_once "./Helpers/AccesoHelper.php";
+
+
 
 class IngresoController {
 
+    private $accesoHelper;
     private $model;
     private $view;
 
     function __construct(){
         $this->model = new IngresoModel();
         $this->view = new IngresoView();
+        $this->accesoHelper = new AccesoHelper();
     }
 
     function logout(){
@@ -23,6 +28,14 @@ class IngresoController {
         $this->view->showIngreso();
     }
 
+    function verUsuarios(){
+        $logueado = $this->accesoHelper->checkLoggedIn();
+        $usuarios = $this->model->getUsser();
+        $this->view->showUsuarios($usuarios, $logueado);
+
+
+    }
+
     function verificacionIngreso(){
         if (!empty($_POST['usuario']) && !empty($_POST['password'])) {
             $usuario = $_POST['usuario'];
@@ -31,6 +44,7 @@ class IngresoController {
             if ($user && password_verify($password, $user->password)) {
                 session_start();
                 $_SESSION["usuario"] = $usuario;
+                $_SESSION['rol']= $user->rol;
                 $this->view->showAdmin();
             } 
             else {
@@ -39,20 +53,36 @@ class IngresoController {
         }
     }
 
+    function vercreateUsser(){
+    $this->view->showCreateUsser();
+
+    }
     function createUsser(){
-        $this->view->showCreateUsser();
         if(!empty($_POST['usuario'])&& !empty($_POST['password'])){
             $userEmail=$_POST['usuario'];
             $userPassword=password_hash($_POST['password'], PASSWORD_BCRYPT);        
-            $usuarios = $this->model->getUsser();
-            if($userEmail ==$usuarios){
-                $this->view->ShowIngreso("El usuario ya existe");
-            }
-            else{
-                $this->model->createUsser($userEmail,$userPassword);
-            }
+            $this->model->createUsser($userEmail,$userPassword);   
         }   
            
     }
-}
+
+    function editarRol($id){
+        $logueado = $this->accesoHelper->checkLoggedIn();
+        if ($logueado == 2){
+            
+            
+        }
+    }
+
+    function updateUsuario(){
+        $logueado = $this->accesoHelper->checkLoggedIn();
+        if ($logueado == 2){
+            if(isset($_POST['rol'])){
+                $rol = $_POST['rol'];
+                $this->model->updateUsuarioDB($_POST['id'], $_POST['usuario'],$_POST['rol'],);
+                $this->view->showUsuarios($logueado, null);
+        }
+    }
+        } 
+   
 

@@ -24,8 +24,14 @@
         case 'home': 
             $reacondicionadosController->verHome(); 
             break;
+        case 'usuarios': 
+            $ingresoController->verUsuarios(); 
+            break;
         case 'usuario': 
             $reacondicionadosController->verUsuario(); 
+            break;
+        case 'registro':
+            $ingresoController->vercreateUsser();
             break;
         case 'createUsser':
             $ingresoController->createUsser();
@@ -81,6 +87,8 @@
         case 'createReacondicionado':
             $reacondicionadosController->createReacondicionado();
             break;
+        case 'editarRol':
+            $ingresoController->editarRol($params[1]);
         default: 
             echo('404 Pagina no encontrada'); 
             break;
