@@ -52,7 +52,6 @@ class ApiCelularesController{
     function eliminar($params = null) {
         $idReacondicionado = $params[":ID"];
         $reacondicionado = $this->model->getReacondicionado($idReacondicionado);
-
         if ($reacondicionado) {
             $this->model->deleteReacondicionadoFromDB($idReacondicionado);
             return $this->view->response("El celular con el id=$idReacondicionado fue borrada", 200);
@@ -76,7 +75,6 @@ class ApiCelularesController{
         $idReacondicionado = $params[':ID'];
         $body = $this->getBody();
         $reacondicionado = $this->model->getReacondicionado($idReacondicionado);
-
         if ($reacondicionado) {
             $this->model->updateReacondicionadoFromDB($idReacondicionado, $body->marca, $body->modelo, $body->precio, $body->codigo, $body->almacenamiento, $body->pantalla, $body->ram, $body->bateria, $body->stock);
             $this->view->response("El celular se actualizó correctamente", 200);

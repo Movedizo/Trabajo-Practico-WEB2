@@ -4,7 +4,10 @@
     <div>
         <h2>Añadir Celulares Reacondicionados</h2>
         <form action="createReacondicionado" method="post">
+        <form action="nueva" method="POST" enctype="multipart/form-data">
+
             <input type="text" placeholder="Marca" name="marca" id="marca">
+            <input type="file" name="input_name" id="imagen">
             <input type="text" placeholder="Modelo" name="modelo" id="modelo">
             <input type="number" placeholder="Precio" name="precio" id="precio">
             <input type="text" placeholder="Codigo" name="codigo" id="codigo">

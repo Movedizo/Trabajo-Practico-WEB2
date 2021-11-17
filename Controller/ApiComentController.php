@@ -14,7 +14,6 @@ class ApiComentController{
         $this->view = new ApiView();
     }
 
-
     function getComents($params = null){
         $idComent = $params[':ID'];
         if(!isset($idComent)){
@@ -32,5 +31,4 @@ class ApiComentController{
             else return $this->view->response("Sin Comentarios", 400);
         }
     }
-
 }

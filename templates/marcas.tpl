@@ -6,6 +6,10 @@
     <ul class="li">
         {foreach from=$marcas item=$item}
             <li><a href="modelo/{$item->id_marca}">{$item->marca}</a></li>
+            {if isset($marca->imagen)}
+                <img src="{$marca->imagen}"/>
+            {/if}
+
             <li>Sistema Operativo {$item->sistemaoperativo}</li>
         {/foreach}
     </ul>

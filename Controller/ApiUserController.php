@@ -29,15 +29,14 @@ class ApiUserController{
         $id = $params[":ID"];
         $user = $this->authHelper->getUser();
         if($user)
-            if($id == $user->sub){
-                $this->view->response($user, 200);
-            }else{
-                $this->view->response("Forbidden", 403);
-            }
+                if($id == $user->sub){
+                    $this->view->response($user, 200);
+                }
+                else{
+                    $this->view->response("Forbidden", 403);
+        }
         else{
-            $this->view->response("Unauthorized", 401);
+            $this->view->response("Unauthorized", 401);      
         }
     }
-   
-
 }

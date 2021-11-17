@@ -85,18 +85,59 @@ class ReacondicionadosController{
     
     function createReacondicionado(){
         $logueado = $this->accesoHelper->checkLoggedIn();
+        $marca = $_POST['marca'];
+        $modelo = $_POST['modelo'];
+        $precio = $_POST['precio'];
+        $codigo = $_POST['codigo'];
+        $almacenamiento = $_POST['almacenamiento'];
+        $pantalla = $_POST['pantalla'];
+        $ram = $_POST['ram'];
+        $bateria = $_POST['bateria'];
+        $stock = $_POST['stock'];
+
         if ($logueado == 1){
-            $this->model->createReacondicionado($_POST['marca'],$_POST['modelo'],$_POST['precio'],$_POST['codigo'], $_POST['almacenamiento'], $_POST['pantalla'], $_POST['ram'], $_POST['bateria'], $_POST['stock']);
-            $this->view->showHomeLocation("verReacondicionados");
-        }    
-        else { $this->view->showHomeLocation("admin");
-        }
+            if (!empty($marca) && !empty($modelo) && !empty($precio) && !empty($codigo) && !empty($almacenamiento) && !empty($pantalla) && !empty($ram) && !empty($bateria && !empty($stock)) {
+                $agregar = true;
+                if ($modelo == $_POST['modelo']) {
+                    $reacondicionados = $this->model->getReacondicionados();
+                    if (count($reacondicionados) > 0)
+                    $agregar = false;
+                }
+
+                if ($agregar){
+                    if($_FILES['input_name']['type'] == "image/jpg" || $_FILES['input_name']['type'] == "image/jpeg" 
+                        || $_FILES['input_name']['type'] == "image/png" ) {
+                        $this->model->save($marca, $modelo, $precio, $codigo, $almacenamiento, $pantalla, $ram, $bateria, $stock, $_FILES['input_name']['tmp_name']);
+                    }
+                    else {
+                        $this->model->save($marca, $modelo, $precio, $codigo, $almacenamiento, $pantalla, $ram, $bateria, $stock);
+                    }
+                    header("Location: " . VER);
+                }
+
+                else
+                $this->view->showHomeLocation("Ese modelo ya existe");
+            } 
+
+            else { 
+            $this->view->showHomeLocation("Faltan datos");
+        }  
     }
     
     function updateReacondicionado(){
         $logueado = $this->accesoHelper->checkLoggedIn();
+        $marca = $_POST['marca'];
+        $modelo = $_POST['modelo'];
+        $precio = $_POST['precio'];
+        $codigo = $_POST['codigo'];
+        $almacenamiento = $_POST['almacenamiento'];
+        $pantalla = $_POST['pantalla'];
+        $ram = $_POST['ram'];
+        $bateria = $_POST['bateria'];
+        $stock = $_POST['stock'];
+
         if ($logueado == 1){
-            $this->model->updateReacondicionadoFromDB($_POST['id_reacondicionado'], $_POST['marca'],$_POST['modelo'],$_POST['precio'],$_POST['codigo'], $_POST['almacenamiento'], $_POST['pantalla'], $_POST['ram'], $_POST['bateria'], $_POST['stock']);
+            $this->model->updateReacondicionadoFromDB($marca, $modelo, $precio, $codigo, $almacenamiento, $pantalla, $ram, $bateria, $stock, $_FILES['input_name']['tmp_name']);
             $this->view->showHomeLocation("verReacondicionados");
         } 
         else { $this->view->showHomeLocation("admin");

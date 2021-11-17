@@ -22,8 +22,9 @@ class MarcasModel{
         return $marca;
     }
 
-
-
-
-
+    function subirImagen($imagen){
+        $target = 'img/marca/' . uniqid() . '.jpg';
+        move_uploaded_file($imagen, $target);
+        return $target;
+    }
 }
