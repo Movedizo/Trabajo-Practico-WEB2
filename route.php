@@ -89,8 +89,12 @@
         case 'createReacondicionado':
             $reacondicionadosController->createReacondicionado();
             break;
+        case 'updateUsuario':
+            $ingresoController->updateUsuario($params[1]);
+            break;
         case 'editarRol':
-            $ingresoController->editarRol($params[1]);
+            $ingresoController->vereditarRol($params[1]);
+            break;
         default: 
             echo('404 Pagina no encontrada'); 
             break;

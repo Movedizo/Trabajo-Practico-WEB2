@@ -65,25 +65,18 @@ class IngresoController {
         }   
            
     }
+    function verEditarRol($idUsuario){
+        $usuario= $this->model->getUsuario($idUsuario);
+        $this->view->showEditarRol($idUsuario, $usuario);
+    }
 
-    function editarRol($id){
+    function updateUsuario($idUsuario){
+        var_dump($idUsuario);
         $logueado = $this->accesoHelper->checkLoggedIn();
-        if ($logueado == 2){
-            
-            
+        if($logueado == 2){
+          $this->model->updateUsuarioDB($idUsuario,$_POST['rol']);
+        $this->view->showHome();
         }
-    }
-
-    function updateUsuario(){
-        $logueado = $this->accesoHelper->checkLoggedIn();
-        if ($logueado == 2){
-            if(isset($_POST['rol'])){
-                $rol = $_POST['rol'];
-                $this->model->updateUsuarioDB($_POST['id'], $_POST['usuario'],$_POST['rol'],);
-                $this->view->showUsuarios($logueado, null);
-        }
-    }
-        } 
-   
 
     }
+}

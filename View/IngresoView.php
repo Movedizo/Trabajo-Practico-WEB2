@@ -27,6 +27,13 @@ class IngresoView{
 
     }
     
+    function showEditarRol($idUsuario,$usuario){
+        $this->smarty->assign('id', $idUsuario);     
+        $this->smarty->assign('usuario', $usuario); 
+        var_dump($usuario);    
+        $this->smarty->display('templates/editarusuario.tpl');
+    }
+
     function showUsuarios($usuarios, $logueado){
         $this->smarty->assign('logueado', $logueado);     
         $this->smarty->assign('usuarios', $usuarios);     

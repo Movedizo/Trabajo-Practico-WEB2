@@ -96,14 +96,16 @@ class ReacondicionadosController{
         $stock = $_POST['stock'];
 
         if ($logueado == 1){
-            if (!empty($marca) && !empty($modelo) && !empty($precio) && !empty($codigo) && !empty($almacenamiento) && !empty($pantalla) && !empty($ram) && !empty($bateria && !empty($stock)) {
+            if ((!empty($marca) && !empty($modelo) && !empty($precio) && !empty($codigo) && !empty($almacenamiento) && !empty($pantalla) && !empty($ram) && !empty($bateria) && !empty($stock))){
                 $agregar = true;
+            
+            
+                $reacondicionados = $this->model->getReacondicionado(); //Recorrer y preguntar si ya existe
                 if ($modelo == $_POST['modelo']) {
-                    $reacondicionados = $this->model->getReacondicionados();
                     if (count($reacondicionados) > 0)
                     $agregar = false;
                 }
-
+//save es createReacondicionado  
                 if ($agregar){
                     if($_FILES['input_name']['type'] == "image/jpg" || $_FILES['input_name']['type'] == "image/jpeg" 
                         || $_FILES['input_name']['type'] == "image/png" ) {
@@ -114,11 +116,12 @@ class ReacondicionadosController{
                     }
                     header("Location: " . VER);
                 }
-
+            }
+        
                 else
                 $this->view->showHomeLocation("Ese modelo ya existe");
             } 
-
+        
             else { 
             $this->view->showHomeLocation("Faltan datos");
         }  
@@ -151,20 +154,6 @@ class ReacondicionadosController{
             $this->view->showHomeLocation("verReacondicionados");
         }
         else { $this->view->showHomeLocation("admin");
-        } 
+        }
     }
-}
-
-
-
-
-    
-
-        
-
-    
-
-
-
-
-
+}  
