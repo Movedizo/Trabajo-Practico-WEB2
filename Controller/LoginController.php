@@ -66,17 +66,21 @@ class IngresoController {
            
     }
     function verEditarRol($idUsuario){
+        var_dump(($idUsuario));
         $usuario= $this->model->getUsuario($idUsuario);
         $this->view->showEditarRol($idUsuario, $usuario);
     }
 
     function updateUsuario($idUsuario){
         var_dump($idUsuario);
+        $usuario= $this->model->getUsuario($idUsuario);
         $logueado = $this->accesoHelper->checkLoggedIn();
-        if($logueado == 2){
-          $this->model->updateUsuarioDB($idUsuario,$_POST['rol']);
-        $this->view->showHome();
+        if($logueado==2){
+            $rol = $_POST['rol'];
+        if($usuario){
+            $this->model->updateUsuarioDB($idUsuario,$rol);
+            $this->view->showHome('usuarios');
+            }
         }
-
     }
 }

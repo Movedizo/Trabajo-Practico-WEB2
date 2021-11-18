@@ -1,13 +1,10 @@
-document.addEventListener(`DOMContentLoaded`, iniciar)
-function iniciar() {
-    
-"user strict"
+  "user strict"
 
 //Aca intento traer el id_reacondicionado que tenemos en smarty
-//let idComent = document.getElementById("idComent");
+let idComent = document.getElementById("idComent").dataset.id;
 //console.log(idComent); 
 
-let urlApi = "api/comentarios/50";
+let urlApi = "api/comentarios/" + idComent;
 
 
 let app = new Vue({
@@ -23,12 +20,12 @@ async function getComents() {
         let response = await fetch(urlApi);
         let comentarios = await response.json();
         
-        app.comentarios = comentarios;
+        app.comentarios.push(comentarios);
   
     } catch (e) {
         console.log(e);
     }
-console.log(app.comentarios)
+
 }
 getComents();
 
@@ -55,5 +52,4 @@ async function createComent(){
     catch(error){
         console.log(error)
     }
-}
 }

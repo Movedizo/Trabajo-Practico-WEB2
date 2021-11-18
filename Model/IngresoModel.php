@@ -30,9 +30,9 @@ class IngresoModel{
             $sentencia->execute([$userEmail,$userPassword]); 
         
 }
-    function updateUsuarioDB($rol,$idUsuario){
-        $sentencia = $this->db->prepare("UPDATE usuario SET rol = ? WHERE id=? ");
-        $sentencia->execute(array($rol, $idUsuario));
+    function updateUsuarioDB($idUsuario,$rol){
+        $sentencia = $this->db->prepare("UPDATE usuario SET rol = ? WHERE id= ? ");
+        $sentencia->execute(array($idUsuario,$rol));
 
     }
 }

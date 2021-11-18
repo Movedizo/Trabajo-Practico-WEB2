@@ -56,6 +56,6 @@
                 </form>
         </div>
         
-<p id="idComent" value="{$reacondicionado->id_reacondicionado}"></p>
+<p id="idComent" data-id={$reacondicionado->id_reacondicionado}></p>
 
 {include file='templates/footer.tpl'}

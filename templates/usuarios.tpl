@@ -1,3 +1,4 @@
+{include file='templates/header.tpl'}
 <h1> Lista de Usuarios</h1>
 
     <table>
@@ -17,4 +18,5 @@
         
     {/foreach}
     
-    </table>
+    </table>}
+{include file='templates/footer.tpl'}
