@@ -1,7 +1,9 @@
   "user strict"
 
+
+  
 //Aca intento traer el id_reacondicionado que tenemos en smarty
-let idComent = document.getElementById("idComent").dataset.id;
+let idComent = document.querySelector("form-crear-comentario").dataset.id;
 //console.log(idComent); 
 
 let urlApi = "api/comentarios/" + idComent;

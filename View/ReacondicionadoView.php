@@ -87,4 +87,9 @@ class ReacondicionadoView {
         $this->smarty->assign('reacondicionados', $reacondicionado);
         $this->smarty->display('templates/reacondicionadosTable.tpl');   
     }
+    function showError($error){
+        echo($error);
+    
+
+    }
 }

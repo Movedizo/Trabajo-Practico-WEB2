@@ -43,7 +43,7 @@
 
 
 <h2>Agrega un Comentario</h2>
-<form class="form-alta" action="" method="POST">
+<form id="form-crear-comentario" data-id="{$reacondicionado->id_reacondicionado}" class="form-alta" action="" method="POST">
     <input placeholder="Comentario" type="text" name="coment" id="coment">
     <p> Puntaje <select id="puntaje"></p>
                 <option value="1"> 1</option>
@@ -56,6 +56,5 @@
                 </form>
         </div>
         
-<p id="idComent" data-id={$reacondicionado->id_reacondicionado}></p>
 
 {include file='templates/footer.tpl'}
