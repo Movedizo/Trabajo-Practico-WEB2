@@ -9,10 +9,29 @@ class MarcasModel{
     }
 
     function getMarcas(){
+        $marcasImagenes = [];
         $sentencia = $this->db->prepare( "SELECT * FROM marcas" );
         $sentencia->execute();
         $marcas = $sentencia->fetchAll(PDO::FETCH_OBJ);
+    
+        foreach ($marcas as $marca) {
+        $sentencia_imagenes = $this->db->prepare( "select * from imagen where id_marca=?");
+        $sentencia_imagenes->execute([$marca['id_marca']]);
+        $imagenes = $sentencia_imagenes->fetchAll(PDO::FETCH_ASSOC);
+        $marca['imagenes'] = $imagenes;
+        $marcasImagenes[] = $marca;
+        }
         return $marcas;
+    }
+
+    function subirImagenes($imagenes){
+        $rutas = [];
+        foreach ($imagenes as $imagen) {
+            $destinoImagen = 'images/marca/' . uniqid() . '.jpg';
+            move_uploaded_file($imagen, $destinoImagen);
+            $imagenes[]=$destinoImagen;
+        }
+        return $rutas;
     }
 
     function getMarca($id){
@@ -20,11 +39,5 @@ class MarcasModel{
         $sentencia->execute(array($id));
         $marca = $sentencia->fetchAll(PDO::FETCH_OBJ);
         return $marca;
-    }
-
-    function subirImagen($imagen){
-        $target = 'img/marca/' . uniqid() . '.jpg';
-        move_uploaded_file($imagen, $target);
-        return $target;
     }
 }

@@ -72,8 +72,6 @@
         case 'listaAdmin';
             $reacondicionadosController->verAdmin();
             break;
-        case 'subirImagen';
-            $marcasController->subirImagen();
         case 'agregar':
             $reacondicionadosController->verAgregar();
             break;     

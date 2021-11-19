@@ -2,6 +2,8 @@
 
 require_once "./Model/ReacondicionadoModel.php";
 require_once "./View/ReacondicionadoView.php";
+require_once "./Model/MarcasModel.php";
+require_once "./View/MarcasView.php";
 require_once "./Helpers/AccesoHelper.php";
 
 class ReacondicionadosController{
@@ -96,35 +98,28 @@ class ReacondicionadosController{
         $stock = $_POST['stock'];
 
         if ($logueado == 1){
-            if ((!empty($marca) && !empty($modelo) && !empty($precio) && !empty($codigo) && !empty($almacenamiento) && !empty($pantalla) && !empty($ram) && !empty($bateria) && !empty($stock))){
+            if (!empty($marca) && !empty($modelo) && !empty($precio) && !empty($codigo) && !empty($almacenamiento) && !empty($pantalla) && !empty($ram) && !empty($bateria && !empty($stock)){
                 $agregar = true;
-            
-            
-                $reacondicionados = $this->model->getReacondicionado(); //Recorrer y preguntar si ya existe
                 if ($modelo == $_POST['modelo']) {
-                    if (count($reacondicionados) > 0)
+                    $reacondicionados = $this->model->getReacondicionados();
                     $agregar = false;
                 }
-//save es createReacondicionado  
                 if ($agregar){
                     if($_FILES['input_name']['type'] == "image/jpg" || $_FILES['input_name']['type'] == "image/jpeg" 
                         || $_FILES['input_name']['type'] == "image/png" ) {
-                        $this->model->save($marca, $modelo, $precio, $codigo, $almacenamiento, $pantalla, $ram, $bateria, $stock, $_FILES['input_name']['tmp_name']);
+                        $this->model->createReacondicionado($marca, $modelo, $precio, $codigo, $almacenamiento, $pantalla, $ram, $bateria, $stock, $_FILES['input_name']['tmp_name']);
                     }
                     else {
-                        $this->model->save($marca, $modelo, $precio, $codigo, $almacenamiento, $pantalla, $ram, $bateria, $stock);
+                        $this->model->createReacondicionado($marca, $modelo, $precio, $codigo, $almacenamiento, $pantalla, $ram, $bateria, $stock);
                     }
                     header("Location: " . VER);
                 }
-            }
-        
                 else
                 $this->view->showHomeLocation("Ese modelo ya existe");
             } 
-        
             else { 
             $this->view->showHomeLocation("Faltan datos");
-        }  
+        } 
     }
     
     function updateReacondicionado(){
@@ -154,6 +149,20 @@ class ReacondicionadosController{
             $this->view->showHomeLocation("verReacondicionados");
         }
         else { $this->view->showHomeLocation("admin");
-        }
+        } 
     }
-}  
+}
+
+
+
+
+    
+
+        
+
+    
+
+
+
+
+
