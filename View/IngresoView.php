@@ -34,7 +34,7 @@ class IngresoView{
     }
 
     function showUsuarios($usuarios, $logueado){
-        $this->smarty->assign('logueado', $logueado);     
+        $this->smarty->assign('rol', $logueado['rol']);     
         $this->smarty->assign('usuarios', $usuarios);     
         $this->smarty->display('templates/usuarios.tpl');
     }

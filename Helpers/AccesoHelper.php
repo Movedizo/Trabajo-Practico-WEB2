@@ -1,13 +1,15 @@
 <?php
 
-class AccesoHelper{
+class AccesoHelper
+{
 
-    function checkLoggedIn(){
-    session_start();
-    if(!isset($_SESSION["usuario"])){
-        $logueado = 0;
-        }
-    else {$logueado = $_SESSION['rol'];
+    function checkLoggedIn()
+    {
+        session_start();
+        if (isset($_SESSION["usuario"])) {
+            $logueado = $_SESSION;
+        } else {
+            $logueado = 0;
         }
     return $logueado;
     }

@@ -65,6 +65,7 @@ class ReacondicionadosController{
         $this->view->verReacondicionados($reacondicionado, $logueado);
     }
     
+
     function verEditar($reacondicionado){
         $logueado = $this->accesoHelper->checkLoggedIn();
         $this->view->verEdicion($reacondicionado, $logueado);
@@ -102,7 +103,7 @@ class ReacondicionadosController{
         $bateria = $_POST['bateria'];
         $stock = $_POST['stock'];
         
-        if ($logueado >= 1){                       
+        if ($logueado['rol'] >= 1){                       
             $this->model->createReacondicionado($marca, $modelo, $precio, $codigo, $almacenamiento, 
                                                 $pantalla, $ram, $bateria, $stock);
             $this->view->showHomeLocation("verReacondicionados");
@@ -116,7 +117,7 @@ class ReacondicionadosController{
     }
     function updateReacondicionado($id){
         $logueado = $this->accesoHelper->checkLoggedIn();
-        if ($logueado == 1){
+        if ($logueado['rol'] == 1){
         if (isset($_POST['marca'],$_POST['modelo'], $_POST['precio'],
                   $_POST['almacenamiento'],$_POST['pantalla'],$_POST['ram'],
                   $_POST['bateria'], $_POST['stock']  )){
@@ -142,7 +143,7 @@ class ReacondicionadosController{
 
    function deleteReacondicionado($id){
         $logueado = $this->accesoHelper->checkLoggedIn();
-        if ($logueado == 1){
+        if ($logueado['rol'] == 1){
             $this->model->deleteReacondicionadoFromDB($id);
             $this->view->showHomeLocation("verReacondicionados");
         }

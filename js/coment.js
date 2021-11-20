@@ -1,13 +1,10 @@
-  "user strict"
 
+"user strict"    
 
-  
-//Aca intento traer el id_reacondicionado que tenemos en smarty
-let idComent = document.querySelector("form-crear-comentario").dataset.id;
-//console.log(idComent); 
-
-let urlApi = "api/comentarios/" + idComent;
-
+let id_reacondicionado = document.querySelector("#form-crear-comentario").dataset.id_reacondicionado;
+let id_usuario = document.querySelector("#form-crear-comentario").dataset.id_usuario;
+const urlApi = "api/comentarios/" + id_reacondicionado;
+//Falta preguntar si la cantidad de items es igual a 1 para incluir el template de comentarios.
 
 let app = new Vue({
     el: "#comentspace",
@@ -15,36 +12,44 @@ let app = new Vue({
         titulo: "Caja de comentarios",
         subtitulo: "Aqui Van Los Comentarios",
         comentarios: [] },   //En este arreglo se guarda el objeto que me trae el fetch
-}); 
+    }); 
 
-async function getComents() {
-    try {
+    async function getComents() {
+        try {
         let response = await fetch(urlApi);
         let comentarios = await response.json();
         
         app.comentarios.push(comentarios);
-  
+        
     } catch (e) {
         console.log(e);
     }
-
+    
 }
 getComents();
 
-//Crear comentarios, sigo sin poder capturar el id que tengo cargado en smarty
+document.addEventListener('DOMContentLoaded', CrearComentarios);
+function CrearComentarios(){
+let btn = document.querySelector("#btn-coment").addEventListener("click", createComent);
+
+
 async function createComent(){
-    let comentario= {
-        "comentario":document.querySelector("#coment"),
-        "puntaje":document.querySelector("#puntaje").value,
-        "fecha":date("Y-m-d"),
-        "id_reacondicionado":idComent,
-        "id_usuario": idUsuario
-    }
+
+    let comentario = document.querySelector("#comentario").value;
+    let puntaje = document.querySelector("#puntaje").value;
+    
+    let comentJson= {
+        comentario :comentario,
+        puntaje: puntaje,
+        fecha:"2021/01/02",
+        id_reacondicionado:id_reacondicionado,
+        id_usuario: id_usuario
+    }   
     try{
         let res = await fetch(urlApi, {
             "method": "POST",
             "headers":{"Content-type": "application/json"},
-            "body": JSON.stringify(comentario)
+            "body": JSON.stringify(comentJson)
         })
         if(res.status===201){
            console.log("creado!")
@@ -54,4 +59,5 @@ async function createComent(){
     catch(error){
         console.log(error)
     }
+}
 }

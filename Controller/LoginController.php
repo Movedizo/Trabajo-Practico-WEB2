@@ -45,6 +45,7 @@ class IngresoController {
                 session_start();
                 $_SESSION["usuario"] = $usuario;
                 $_SESSION['rol']= $user->rol;
+                $_SESSION['id_usuario']= $user->id;
                 $this->view->showAdmin();
             } 
             else {
@@ -75,10 +76,10 @@ class IngresoController {
         var_dump($idUsuario);
         $usuario= $this->model->getUsuario($idUsuario);
         $logueado = $this->accesoHelper->checkLoggedIn();
-        if($logueado==2){
+        if($logueado['rol']== 2){
             $rol = $_POST['rol'];
         if($usuario){
-            $this->model->updateUsuarioDB($idUsuario,$rol);
+            $this->model->updateUsuarioDB($$rol, $idUsuario);
             $this->view->showHome('usuarios');
             }
         }

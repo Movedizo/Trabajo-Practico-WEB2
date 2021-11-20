@@ -9,21 +9,12 @@ class MarcasModel{
     }
 
     function getMarcas(){
-        $marcasImagenes = [];
-        $sentencia = $this->db->prepare( "SELECT * FROM marcas" );
+        $sentencia = $this->db->prepare( "SELECT * FROM `marcas`" );
         $sentencia->execute();
         $marcas = $sentencia->fetchAll(PDO::FETCH_OBJ);
-    
-        foreach ($marcas as $marca) {
-        $sentencia_imagenes = $this->db->prepare( "select * from imagen where id_marca=?");
-        $sentencia_imagenes->execute([$marca['id_marca']]);
-        $imagenes = $sentencia_imagenes->fetchAll(PDO::FETCH_ASSOC);
-        $marca['imagenes'] = $imagenes;
-        $marcasImagenes[] = $marca;
-        }
         return $marcas;
     }
-
+    
     function subirImagenes($imagenes){
         $rutas = [];
         foreach ($imagenes as $imagen) {
