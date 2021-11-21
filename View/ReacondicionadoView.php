@@ -19,15 +19,7 @@ class ReacondicionadoView {
         $this->smarty->display('templates/usuario.tpl');
     }
 
-    function verAdmin($logueado){
-        $this->smarty->assign('logueado', $logueado['rol']);
-        if($logueado['rol'] == 1){
-            $this->smarty->display('templates/admin.tpl');
-            }
-       else { $this->smarty->display('templates/usuario.tpl');
-            }
-    }
-
+  
     function verModeloPorMarca($marcas, $modeloPorMarca){
         $this->smarty->assign('titulo', "Lista de Celulares Por Marca");
         $this->smarty->assign('marcas', $marcas);
@@ -67,8 +59,9 @@ class ReacondicionadoView {
     }
     
 
-    function verReacondicionados($reacondicionado){
-        $this->smarty->assign('reacondicionados', $reacondicionado);
+    function verReacondicionados($reacondicionados,$logueado){
+        $this->smarty->assign('rol', $logueado['rol']);
+        $this->smarty->assign('reacondicionados', $reacondicionados);
         $this->smarty->display('templates/reacondicionadosTable.tpl');
     }
  

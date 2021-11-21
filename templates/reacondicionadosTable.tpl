@@ -13,14 +13,14 @@
             <td>Velocidad</td>
             <td>Capacidad de bateria</td>
             <td>Stock</td>  
-            <td ><a href="listaAdmin">Inicio</a></td>
+            <td ><a href="homestart">Inicio</a></td>
             <td><a href="logout">Salir</a></td>
             </tr>
             
             {foreach from=$reacondicionados item=$reacondicionado}
                 <tr>
             <td>{$reacondicionado->marca}</td>
-            <td>{$reacondicionado->modelo}</td>
+            <td><a href="caracteristicas/{$reacondicionado->id_reacondicionado}">{$reacondicionado->modelo}</a></td>
             <td>{$reacondicionado->precio}</td>
             <td>{$reacondicionado->codigo}</td>
             <td>{$reacondicionado->almacenamiento}</td>

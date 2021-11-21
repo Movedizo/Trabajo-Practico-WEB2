@@ -15,8 +15,13 @@ class IngresoView{
         $this->smarty->display('templates/ingreso.tpl');
     }
     
-    function showAdmin(){
-        $this->smarty->display('templates/admin.tpl');
+    function showStart($logueado){
+        $this->smarty->assign('rol', $logueado['rol']);     
+        $this->smarty->display('templates/start.tpl');
+    }
+
+    function showUsuario(){
+        $this->smarty->display('templates/usuario.tpl');
     }
 
     function showHome($url){

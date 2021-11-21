@@ -22,7 +22,13 @@
     switch ($params[0]){
 
         case 'home': 
-            $reacondicionadosController->verHome(); 
+            $ingresoController->showIngreso();
+            break;
+        case 'homestart': 
+            $ingresoController->showStart();
+            break;
+        case 'visitante':
+            $ingresoController->showStart();
             break;
         case 'usuarios': 
             $ingresoController->verUsuarios(); 
@@ -35,9 +41,6 @@
             break;
         case 'createUsser':
             $ingresoController->createUsser();
-            break;
-        case 'admin': 
-            $ingresoController->ingresoAdmin();  
             break;
         case 'logout': 
             $ingresoController->logout(); 
@@ -69,9 +72,6 @@
         case 'ram': 
             $reacondicionadosController->verRam();
             break;
-        case 'listaAdmin';
-            $reacondicionadosController->verAdmin();
-            break;
         case 'agregar':
             $reacondicionadosController->verAgregar();
             break;     
@@ -90,6 +90,9 @@
         case 'updateUsuario':
             $ingresoController->updateUsuario($params[1]);
             break;
+        case 'deleteUsuario':
+            $ingresoController->deleteUsuario($params[1]);
+            break;    
         case 'editarRol':
             $ingresoController->vereditarRol($params[1]);
             break;

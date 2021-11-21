@@ -20,10 +20,6 @@ class ReacondicionadosController{
         $this->accesoHelper = new AccesoHelper();
     }
 
-    function verHome(){
-       $this->view->verAcceso();
-    }
-
     function verUsuario(){
         session_start();
         session_destroy();
@@ -61,8 +57,8 @@ class ReacondicionadosController{
 
     function verReacondicionados(){
         $logueado = $this->accesoHelper->checkLoggedIn();
-        $reacondicionado = $this->model->getReacondicionadoMultitabla();
-        $this->view->verReacondicionados($reacondicionado, $logueado);
+        $reacondicionados = $this->model->getReacondicionadoMultitabla();
+        $this->view->verReacondicionados($reacondicionados, $logueado);
     }
     
 
@@ -81,11 +77,7 @@ class ReacondicionadosController{
         $this->view->verCaracteristicas($reacondicionado, $logueado);     
     }
     
-    function verAdmin(){
-        $logueado = $this->accesoHelper->checkLoggedIn();
-        $this->view->verAdmin($logueado);
-    }
-    
+
     
     function createReacondicionado(){
         $logueado = $this->accesoHelper->checkLoggedIn();
@@ -136,7 +128,7 @@ class ReacondicionadosController{
         $this->model->updateReacondicionadoFromDB($id, $marca, $modelo, $precio, $codigo, $almacenamiento, $pantalla, $ram, $bateria, $stock);
         $this->view->showHomeLocation("verReacondicionados");
         } 
-        else { $this->view->showHomeLocation("admin");
+        else { $this->view->showHomeLocation("homestart");
         } 
    }
 
@@ -147,7 +139,7 @@ class ReacondicionadosController{
             $this->model->deleteReacondicionadoFromDB($id);
             $this->view->showHomeLocation("verReacondicionados");
         }
-        else { $this->view->showHomeLocation("admin");
+        else { $this->view->showHomeLocation("homestart");
         } 
     }
 }

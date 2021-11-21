@@ -21,11 +21,16 @@ class IngresoController {
     function logout(){
         session_start();
         session_destroy();
-        $this->view->showHome("Sesion Terminada");
+        $this->view->showHome("home");
     }
 
-    function ingresoAdmin(){
+    function showingreso(){
         $this->view->showIngreso();
+    }
+
+    function showStart(){
+        $logueado = $this->accesoHelper->checkLoggedIn();
+        $this->view->showStart($logueado);
     }
 
     function verUsuarios(){
@@ -41,19 +46,19 @@ class IngresoController {
             $usuario = $_POST['usuario'];
             $password = $_POST['password'];
             $user = $this->model->getAcceso($usuario);
-            if ($user && password_verify($password, $user->password)) {
+        }
+        if ($user && password_verify($password, $user->password)) {
                 session_start();
                 $_SESSION["usuario"] = $usuario;
                 $_SESSION['rol']= $user->rol;
                 $_SESSION['id_usuario']= $user->id;
-                $this->view->showAdmin();
-            } 
-            else {
+        $logueado = $this->accesoHelper->checkLoggedIn();
+        $this->view->showStart($logueado);
+        } 
+         else {
                 $this->view->showIngreso("Verificar datos ingresados");
             }
         }
-    }
-
     function vercreateUsser(){
     $this->view->showCreateUsser();
 
@@ -62,26 +67,36 @@ class IngresoController {
         if(!empty($_POST['usuario'])&& !empty($_POST['password'])){
             $userEmail=$_POST['usuario'];
             $userPassword=password_hash($_POST['password'], PASSWORD_BCRYPT);        
-            $this->model->createUsser($userEmail,$userPassword);   
+            $this->model->createUsser($userEmail,$userPassword);  
+            $this->view->showhome('homestart');
         }   
            
     }
     function verEditarRol($idUsuario){
-        var_dump(($idUsuario));
         $usuario= $this->model->getUsuario($idUsuario);
         $this->view->showEditarRol($idUsuario, $usuario);
     }
 
     function updateUsuario($idUsuario){
-        var_dump($idUsuario);
+        $idUsuario= $_POST['idUsuario'];
         $usuario= $this->model->getUsuario($idUsuario);
         $logueado = $this->accesoHelper->checkLoggedIn();
         if($logueado['rol']== 2){
-            $rol = $_POST['rol'];
+        $rol = $_POST['rol'];
         if($usuario){
-            $this->model->updateUsuarioDB($$rol, $idUsuario);
+            $this->model->updateUsuarioDB($rol, $idUsuario);
             $this->view->showHome('usuarios');
             }
         }
     }
+
+    function deleteUsuario($idUsuario){
+        $logueado = $this->accesoHelper->checkLoggedIn();
+        if($logueado['rol']== 2){
+        $this->model->deleteUsuario($idUsuario);
+        $this->view->showHome('usuarios');
+
+        }
+    }
+
 }

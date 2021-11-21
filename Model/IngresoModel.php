@@ -32,9 +32,16 @@ class IngresoModel{
 }
 
 
-function updateUsuarioDB($rol, $idUsuario){
-        $sentencia = $this->db->prepare("UPDATE usuario SET rol = ? WHERE id= ? ");
+    function updateUsuarioDB($rol, $idUsuario){
+        $sentencia = $this->db->prepare("UPDATE usuario SET rol = ? WHERE id = ?");
         $sentencia->execute(array($rol, $idUsuario));
 
     }
+
+    function deleteUsuario($idUsuario){
+        $sentencia = $this->db->prepare("DELETE FROM usuario WHERE id = ?");
+        $sentencia->execute(array($idUsuario));
+
+    }
+
 }
