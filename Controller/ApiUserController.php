@@ -34,9 +34,11 @@ class ApiUserController{
                 }
                 else{
                     $this->view->response("Forbidden", 403);
-        }
+                }
         else{
             $this->view->response("Unauthorized", 401);      
         }
     }
 }
+
+?>

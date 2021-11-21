@@ -8,7 +8,7 @@
             <input type="submit" class="btn btn-primary" value="Ingresar">
         </form>
     <a href="registro">Crear usuario</a>
-        </div>
+</div>
 
 <h2 class="">{$error}<h2>
 

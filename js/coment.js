@@ -1,13 +1,9 @@
-  "user strict"
-
-
-  
+"user strict"
+ 
 //Aca intento traer el id_reacondicionado que tenemos en smarty
 let idComent = document.querySelector("form-crear-comentario").dataset.id;
 //console.log(idComent); 
-
 let urlApi = "api/comentarios/" + idComent;
-
 
 let app = new Vue({
     el: "#comentspace",
@@ -20,15 +16,15 @@ let app = new Vue({
 async function getComents() {
     try {
         let response = await fetch(urlApi);
-        let comentarios = await response.json();
-        
+        let comentarios = await response.json();   
         app.comentarios.push(comentarios);
-  
-    } catch (e) {
-        console.log(e);
     }
 
+    catch (e) {
+        console.log(e);
+    }
 }
+
 getComents();
 
 //Crear comentarios, sigo sin poder capturar el id que tengo cargado en smarty
@@ -40,8 +36,8 @@ async function createComent(){
         "id_reacondicionado":idComent,
         "id_usuario": idUsuario
     }
-    try{
-        let res = await fetch(urlApi, {
+
+    try{let res = await fetch(urlApi, {
             "method": "POST",
             "headers":{"Content-type": "application/json"},
             "body": JSON.stringify(comentario)
@@ -55,3 +51,4 @@ async function createComent(){
         console.log(error)
     }
 }
+

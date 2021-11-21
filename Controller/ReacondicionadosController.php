@@ -85,60 +85,57 @@ class ReacondicionadosController{
         $this->view->verAdmin($logueado);
     }
     
-    
     function createReacondicionado(){
         $logueado = $this->accesoHelper->checkLoggedIn();
-      if (isset($_POST['marca'],$_POST['modelo'], $_POST['precio'],
+        if (isset($_POST['marca'],$_POST['modelo'], $_POST['precio'],
                  $_POST['almacenamiento'],$_POST['pantalla'],$_POST['ram'],
-                 $_POST['bateria'], $_POST['stock']  )){
+                 $_POST['bateria'], $_POST['stock'])){
         
-        $marca = $_POST['marca'];
-        $modelo = $_POST['modelo'];
-        $precio = $_POST['precio'];
-        $codigo = $_POST['codigo'];
-        $almacenamiento = $_POST['almacenamiento'];
-        $pantalla = $_POST['pantalla'];
-        $ram = $_POST['ram'];
-        $bateria = $_POST['bateria'];
-        $stock = $_POST['stock'];
+            $marca = $_POST['marca'];
+            $modelo = $_POST['modelo'];
+            $precio = $_POST['precio'];
+            $codigo = $_POST['codigo'];
+            $almacenamiento = $_POST['almacenamiento'];
+            $pantalla = $_POST['pantalla'];
+            $ram = $_POST['ram'];
+            $bateria = $_POST['bateria'];
+            $stock = $_POST['stock'];
         
-        if ($logueado >= 1){                       
-            $this->model->createReacondicionado($marca, $modelo, $precio, $codigo, $almacenamiento, 
-                                                $pantalla, $ram, $bateria, $stock);
-            $this->view->showHomeLocation("verReacondicionados");
+            if ($logueado >= 1){                       
+                $this->model->createReacondicionado($marca, $modelo, $precio, $codigo, $almacenamiento, 
+                            $pantalla, $ram, $bateria, $stock);
+                $this->view->showHomeLocation("verReacondicionados");
             } 
-            else { 
-            $this->view->showError("Faltan datos");
-            $this->view->verAgregar();// o una o la otra
-        } 
-
+            else{ 
+                $this->view->showError("Faltan datos");
+                $this->view->verAgregar();// o una o la otra
+            } 
         }
     }
+
     function updateReacondicionado($id){
         $logueado = $this->accesoHelper->checkLoggedIn();
         if ($logueado == 1){
-        if (isset($_POST['marca'],$_POST['modelo'], $_POST['precio'],
-                  $_POST['almacenamiento'],$_POST['pantalla'],$_POST['ram'],
-                  $_POST['bateria'], $_POST['stock']  )){
+            if (isset($_POST['marca'],$_POST['modelo'], $_POST['precio'],
+                    $_POST['almacenamiento'],$_POST['pantalla'],$_POST['ram'],
+                    $_POST['bateria'], $_POST['stock']  )){
 
-        $marca = $_POST['marca'];
-        $modelo = $_POST['modelo'];
-        $precio = $_POST['precio'];
-        $codigo = $_POST['codigo'];
-        $almacenamiento = $_POST['almacenamiento'];
-        $pantalla = $_POST['pantalla'];
-        $ram = $_POST['ram'];
-        $bateria = $_POST['bateria'];
-        $stock = $_POST['stock'];
-        }
-       
-        $this->model->updateReacondicionadoFromDB($id, $marca, $modelo, $precio, $codigo, $almacenamiento, $pantalla, $ram, $bateria, $stock);
-        $this->view->showHomeLocation("verReacondicionados");
+                $marca = $_POST['marca'];
+                $modelo = $_POST['modelo'];
+                $precio = $_POST['precio'];
+                $codigo = $_POST['codigo'];
+                $almacenamiento = $_POST['almacenamiento'];
+                $pantalla = $_POST['pantalla'];
+                $ram = $_POST['ram'];
+                $bateria = $_POST['bateria'];
+                $stock = $_POST['stock'];
+            }
+            $this->model->updateReacondicionadoFromDB($id, $marca, $modelo, $precio, $codigo, $almacenamiento, $pantalla, $ram, $bateria, $stock);
+            $this->view->showHomeLocation("verReacondicionados");
         } 
         else { $this->view->showHomeLocation("admin");
         } 
-   }
-
+    }
 
    function deleteReacondicionado($id){
         $logueado = $this->accesoHelper->checkLoggedIn();
@@ -150,6 +147,8 @@ class ReacondicionadosController{
         } 
     }
 }
+
+?>
 
     
 

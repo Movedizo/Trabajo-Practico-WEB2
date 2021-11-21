@@ -53,17 +53,19 @@ class AuthApiHelper{
         return null;
     }
 
-    public function createToken($user)
-    {
+    public function createToken($user){
+
         $header = array(
             'alg' => 'HS256',
             "typ" => 'JWT'
         );
+
         $payload = array(
             "sub" => 1,
             "name" => $user["user"],
             "rol" => ["admin", "other"]
         );
+
         $header = base64url_encode(json_encode($header));
         $payload = base64url_encode(json_encode($payload));
         $signature = hash_hmac('SHA256', "$header.$payload", $this->key, true);
@@ -71,8 +73,8 @@ class AuthApiHelper{
         return "$header.$payload.$signature";
     }
 
-    function getHeader()
-    {
+    function getHeader(){
+
         if(isset($_SERVER["REDIRECT_HTTP_AUTHORIZATION"])){
             return $_SERVER["REDIRECT_HTTP_AUTHORIZATION"];
         }
@@ -82,3 +84,5 @@ class AuthApiHelper{
         return null;
     }
 }
+
+?>

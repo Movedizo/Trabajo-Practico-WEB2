@@ -9,7 +9,6 @@
             {if isset($marca->imagen)}
                 <img src="{$marca->imagen}"/>
             {/if}
-
             <li>Sistema Operativo {$item->sistemaoperativo}</li>
         {/foreach}
     </ul>

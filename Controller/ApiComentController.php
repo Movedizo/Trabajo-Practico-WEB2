@@ -5,8 +5,8 @@ require_once "./Model/ReacondicionadoModel.php";
 require_once "./View/ApiView.php";
 require_once "./Helpers/AccesoHelper.php";
 
-
 class ApiComentController{
+
     private $model;
     private $view;
     private $accesoHelper;
@@ -43,12 +43,12 @@ class ApiComentController{
         }
     }
 
-
     private function getBody() {
         $bodyString = file_get_contents("php://input");
         return json_decode($bodyString);
     }
-
 }
+
+?>
 
 

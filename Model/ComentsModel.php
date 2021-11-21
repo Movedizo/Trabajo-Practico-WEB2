@@ -25,9 +25,7 @@ class ComentsModel{
     function createComent($comentario, $puntaje, $fecha, $id_reacondicionado, $id_usuario){
         $sentencia = $this->db->prepare("INSERT INTO comentarios(id_usuario, id_reacondicionado, comentario, puntaje, fecha) VALUES(?,?,?,?,?");
         $sentencia->execute(array($comentario, $puntaje, $fecha, $id_reacondicionado, $id_usuario));
-        
-
     }
-    
-
 }
+
+?>

@@ -41,3 +41,5 @@ class MarcasModel{
         return $marca;
     }
 }
+
+?>

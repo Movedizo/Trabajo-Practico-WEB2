@@ -72,3 +72,5 @@ class ReacondicionadoModel{
         return $reacondicionado;
     }
 }
+
+?>

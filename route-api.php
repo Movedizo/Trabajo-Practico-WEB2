@@ -18,3 +18,5 @@ $router->addRoute('users/token', 'GET', 'ApiUserController', 'obtenerToken');
 $router->addRoute('users/:ID', 'GET', 'ApiUserController', 'obtenerUsuario');
 
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);
+
+?>

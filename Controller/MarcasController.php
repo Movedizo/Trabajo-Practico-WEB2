@@ -18,3 +18,5 @@ class MarcasController{
         $this->view->verMarcas($marcas);
     } 
 }
+
+?>

@@ -22,9 +22,9 @@ class IngresoView{
     function showHome($url){
         header("Location: ".BASE_URL."$url");
     }
+
     function showCreateUsser(){
         $this->smarty->display('templates/registro.tpl');
-
     }
     
     function showEditarRol($idUsuario,$usuario){
@@ -38,5 +38,6 @@ class IngresoView{
         $this->smarty->assign('usuarios', $usuarios);     
         $this->smarty->display('templates/usuarios.tpl');
     }
-
 }
+
+?>

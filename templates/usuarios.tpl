@@ -1,22 +1,22 @@
 {include file='templates/header.tpl'}
+
 <h1> Lista de Usuarios</h1>
 
-    <table>
+<table>
     <tr>
-    <td>Usuario</td>
-    <td>Rol</td>
+        <td>Usuario</td>
+        <td>Rol</td>
     </tr>
     <tr>
-    {foreach from=$usuarios item=$usuario}
-    <td>{$usuario->usuario}</td>
-    <td>{$usuario->rol}</td>
-    {if $logueado == 2 && $usuario->rol <2 }    
-        <td> <a href="editarRol/{$usuario->id}">Editar Rol</a></button></td>
-        <td> <a href="eliminarUsuario/{$usuario->id}">Eliminar Usuario</a></button></td>                  
-    {/if}
+        {foreach from=$usuarios item=$usuario}
+        <td>{$usuario->usuario}</td>
+        <td>{$usuario->rol}</td>
+            {if $logueado == 2 && $usuario->rol <2 }    
+                <td> <a href="editarRol/{$usuario->id}">Editar Rol</a></button></td>
+                <td> <a href="eliminarUsuario/{$usuario->id}">Eliminar Usuario</a></button></td>                  
+            {/if}
+        {/foreach}
     </tr>
-        
-    {/foreach}
-    
-    </table>}
+</table>
+
 {include file='templates/footer.tpl'}

@@ -4,8 +4,6 @@ require_once "./Model/IngresoModel.php";
 require_once "./View/IngresoView.php";
 require_once "./Helpers/AccesoHelper.php";
 
-
-
 class IngresoController {
 
     private $accesoHelper;
@@ -32,8 +30,6 @@ class IngresoController {
         $logueado = $this->accesoHelper->checkLoggedIn();
         $usuarios = $this->model->getUsser();
         $this->view->showUsuarios($usuarios, $logueado);
-
-
     }
 
     function verificacionIngreso(){
@@ -54,17 +50,17 @@ class IngresoController {
     }
 
     function vercreateUsser(){
-    $this->view->showCreateUsser();
-
+        $this->view->showCreateUsser();
     }
+
     function createUsser(){
         if(!empty($_POST['usuario'])&& !empty($_POST['password'])){
             $userEmail=$_POST['usuario'];
             $userPassword=password_hash($_POST['password'], PASSWORD_BCRYPT);        
             $this->model->createUsser($userEmail,$userPassword);   
-        }   
-           
+        }        
     }
+
     function verEditarRol($idUsuario){
         var_dump(($idUsuario));
         $usuario= $this->model->getUsuario($idUsuario);
@@ -77,10 +73,12 @@ class IngresoController {
         $logueado = $this->accesoHelper->checkLoggedIn();
         if($logueado==2){
             $rol = $_POST['rol'];
-        if($usuario){
-            $this->model->updateUsuarioDB($idUsuario,$rol);
-            $this->view->showHome('usuarios');
+            if($usuario){
+                $this->model->updateUsuarioDB($idUsuario,$rol);
+                $this->view->showHome('usuarios');
             }
         }
     }
 }
+
+?>

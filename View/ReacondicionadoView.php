@@ -23,9 +23,9 @@ class ReacondicionadoView {
         $this->smarty->assign('logueado', $logueado);
         if($logueado == 1){
             $this->smarty->display('templates/admin.tpl');
-            }
-       else { $this->smarty->display('templates/usuario.tpl');
-            }
+        }
+        else { $this->smarty->display('templates/usuario.tpl');
+        }
     }
 
     function verModeloPorMarca($marcas, $modeloPorMarca){
@@ -43,8 +43,7 @@ class ReacondicionadoView {
         $this->smarty->assign('logueado', $logueado);
         $this->smarty->assign('titulo', "Lista de Celulares Por Almacenamiento");
         $this->smarty->assign('reacondicionados', $porAlmacenamiento);
-        $this->smarty->display('templates/reacondicionadosTable.tpl');   
-        
+        $this->smarty->display('templates/reacondicionadosTable.tpl');       
     }
 
     function verAlmacenamiento($almacenamiento){
@@ -66,7 +65,6 @@ class ReacondicionadoView {
         $this->smarty->display('templates/reacondicionadosTable.tpl');   
     }
     
-
     function verReacondicionados($reacondicionado){
         $this->smarty->assign('reacondicionados', $reacondicionado);
         $this->smarty->display('templates/reacondicionadosTable.tpl');
@@ -87,9 +85,10 @@ class ReacondicionadoView {
         $this->smarty->assign('reacondicionados', $reacondicionado);
         $this->smarty->display('templates/reacondicionadosTable.tpl');   
     }
+
     function showError($error){
         echo($error);
-    
-
     }
 }
+
+?>

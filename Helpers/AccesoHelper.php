@@ -12,3 +12,5 @@ class AccesoHelper{
     return $logueado;
     }
 }
+
+?>

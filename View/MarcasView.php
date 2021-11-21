@@ -15,3 +15,5 @@ class MarcasView{
         $this->smarty->display('templates/marcas.tpl');
     }
 }
+
+?>
