@@ -86,4 +86,14 @@ class ReacondicionadoView {
     
 
     }
+
+    function verPaginado($totalPaginas, $reacondicionados, $logueado){
+        $this->smarty->assign('reacondicionados', $reacondicionados);
+        $this->smarty->assign('rol', $logueado['rol']);
+
+        $this->smarty->assign('paginas' , $totalPaginas);
+        $this->smarty->display('templates/reacondicionadosTable.tpl');   
+    }
+
+
 }

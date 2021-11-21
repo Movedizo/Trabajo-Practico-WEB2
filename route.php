@@ -72,6 +72,8 @@
         case 'ram': 
             $reacondicionadosController->verRam();
             break;
+        case 'pagina':
+            $reacondicionadosController->getReacondicionadosPaginados();    
         case 'agregar':
             $reacondicionadosController->verAgregar();
             break;     

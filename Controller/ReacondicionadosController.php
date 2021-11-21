@@ -142,11 +142,26 @@ class ReacondicionadosController{
         else { $this->view->showHomeLocation("homestart");
         } 
     }
+
+
+
+ function getReacondicionadosPaginados(){
+     $itemPorPagina = 10;
+     $pagina = 1;
+    $reacondicionados = $this->model->getReacondicionadosPaginados($itemPorPagina,$pagina);
+    $totalReacondicionados = $this->model->getTotalReacondiconados();
+    $logueado = $this->accesoHelper->checkLoggedIn();
+
+   $totalPaginas = ($totalReacondicionados / $itemPorPagina);
+   $totalPaginas = ceil($totalPaginas);
+   $this->view->verPaginado($totalPaginas, $reacondicionados, $logueado);
+
+
+
+
+ }
 }
 
-    
-
-        
 
     
 

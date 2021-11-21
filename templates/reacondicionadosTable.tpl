@@ -39,6 +39,25 @@
     </table> 
 </div>
 
+
+<nav aria-label="Paginacion">
+<ul class="pagination">
+   
+
+<li class="page-item"> <a class="page-link"
+    href="#">Anterior</a></li>
+    
+    
+    {for $i= 0; $i<$paginas; $i++}
+        
+       <li class="page-item"><a class="page-link" href="pagina.php?{$i}">{$i}</a></li>
+    {/for}
+ 
+    <li class="page-item"> <a class="page-link"
+    href="#">Siguiente</a></li>
+</nav>
+
+
 <div id="form-crear-comentario" data-id_usuario= "{$id_usuario}" data-id_reacondicionado="{$reacondicionado->id_reacondicionado}">
 {include file="templates/coments.tpl"}
 </div>

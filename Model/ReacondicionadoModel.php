@@ -65,10 +65,30 @@ class ReacondicionadoModel{
         return $reacondicionado;   
     }
 
+    function getTotalReacondiconados(){
+        $sentencia = $this->db->prepare("SELECT * FROM reacondicionados");
+        $sentencia->execute();
+        $sentencia->fetchAll(PDO::FETCH_OBJ);
+        $totalReacondicionados = $sentencia->rowCount();
+        return $totalReacondicionados;    
+    }
+
+
     function getReacondicionadoMultitabla(){
         $sentencia = $this->db->prepare("SELECT * FROM reacondicionados as r INNER JOIN marcas as m ON r.id_marca=m.id_marca");
         $sentencia->execute();
         $reacondicionado= $sentencia->fetchAll(PDO::FETCH_OBJ);
         return $reacondicionado;
+    }
+
+    function getReacondicionadosPaginados($itemPorPagina, $pagina){
+        $sentencia = $this->db->prepare("SELECT * FROM reacondicionados as r 
+        INNER JOIN marcas as m ON r.id_marca=m.id_marca LIMIT :inicio, :itemPorPagina");
+        $sentencia->bindParam(':inicio', $pagina, PDO::PARAM_INT);
+        $sentencia->bindParam(' :itemPorPagina',$itemPorPagina, PDO::PARAM_INT);
+        $sentencia->execute();
+        $reacondicionados= $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $reacondicionados;
+
     }
 }
