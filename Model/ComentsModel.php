@@ -15,11 +15,9 @@ class ComentsModel{
         return $coment;
     }
 
-    function getComents($id_reacondicionado){
-        $sentencia = $this->db->prepare("SELECT comentarios.*, usuario.usuario FROM comentarios LEFT JOIN usuario
-                ON comentarios.id_usuario = usuario.id_usuario
-                WHERE id_reacondicionados = ?" );
-        $sentencia->execute($id_reacondicionado);
+    function getComents(){
+        $sentencia = $this->db->prepare("SELECT * FROM comentarios");
+        $sentencia->execute();
         $coments = $sentencia->fetchAll(PDO::FETCH_OBJ);
         return $coments;
     }
@@ -34,4 +32,35 @@ class ComentsModel{
         $sentencia = $this->db->prepare("DELETE FROM comentarios WHERE id = ?");
         $sentencia->execute(array($id));
     }
+
+    function getComentsDereacondicionado($id){
+        $sentencia = $this->db->prepare("SELECT * FROM comentarios WHERE id_reacondicionado=?");
+        $sentencia->execute(array($id));
+        $coments = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $coments;
+    }
+
+    function getComentsFiltradosOrdenados($sort, $order, $puntaje, $idReacondicionado){
+        $sentencia = $this->db->prepare("SELECT * FROM comentarios WHERE puntaje=? AND id_reacondicionado=? ORDER BY $sort $order");
+        $sentencia->execute(array($puntaje, $idReacondicionado));
+        $coments = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $coments;
+    }
+
+    function getComentsOrdenados($sort, $order, $idReacondicionado){
+        $sentencia = $this->db->prepare("SELECT * FROM comentarios WHERE id_reacondicionado=? ORDER BY $sort $order");
+        $sentencia->execute(array($idReacondicionado));
+        $coments = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $coments;
+    }
+
+    function getComentsFiltrados($puntaje, $idReacondicionados){
+        $sentencia = $this->db->prepare("SELECT * FROM comentarios WHERE puntaje=? AND id_reacondicionados=?");
+        $sentencia->execute(array($puntaje,$idReacondicionados));
+        $comentarios = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $comentarios;
+    }
+
+
+
 }

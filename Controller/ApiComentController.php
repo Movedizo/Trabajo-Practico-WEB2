@@ -23,7 +23,7 @@ class ApiComentController{
         $idComent = $params[':ID'];
 
         if(!isset($idComent)){
-            $coments = $this->model->GetComents();
+            $coments = $this->model->GetComents($idComent);
             if($coments){
                 return $this->view->response($coments, 200);
             } 
@@ -55,15 +55,17 @@ class ApiComentController{
     }
 
     function deleteComent($params = null){
+        $logueado = $this->accesoHelper->checkLoggedIn();
+        if($logueado >= 1){
+            $idComent = $params[":ID"];
+            $coment = $this->model->getComents($idComent);
 
-        $idComent = $params[":ID"];
-        $coment = $this->model->getComents($idComent);
-
-        if ($coment) {
-            $this->model->getComents($idComent);
-            return $this->view->response("El comentario con el id=$idComent fue eliminado", 200);
-        } else {
-            return $this->view->response("El comentario con el id=$idComent no existe", 404);
+            if ($coment) {
+                $this->model->getComents($idComent);
+                return $this->view->response("El comentario con el id=$idComent fue eliminado", 200);
+            } else {
+                return $this->view->response("El comentario con el id=$idComent no existe", 404);
+            }
         }
     }
 
