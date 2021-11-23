@@ -9,14 +9,16 @@ require_once "./Helpers/HelperPaginado.php";
 
 const itemsPorPagina = 10;
 
-class ReacondicionadosController{
+class ReacondicionadosController
+{
 
     private $model;
     private $view;
     private $accesoHelper;
     private $helperPaginado;
 
-    function __construct(){
+    function __construct()
+    {
         $this->model = new ReacondicionadoModel();
         $this->view = new ReacondicionadoView();
         $this->marcasModel = new MarcasModel();
@@ -25,22 +27,24 @@ class ReacondicionadosController{
         $this->helperPaginado = new HelperPaginado();
     }
 
-    function verUsuario(){
+    function verUsuario()
+    {
         session_start();
         session_destroy();
         $this->view->verUsuario();
     }
 
-    function verReacondicionadosFull($id= NULL){
+    function verReacondicionadosFull($id = NULL)
+    {
         $logueado = $this->accesoHelper->checkLoggedIn();
-        if(isset($_GET['modelo'])){
-           $pormarca = ($_GET['modelo']);
+        if (isset($_GET['marca'])) {
+            $pormarca = ($_GET['marca']);
             $modeloPorMarca = $this->model->getModelosPorMarca($pormarca);
-            $this->view->verModeloPorMarca($pormarca, $modeloPorMarca, $logueado);
+            $this->view->verModeloPorMarca($modeloPorMarca, $logueado);
         }
-        
-        
-        
+
+
+
         /* Comentamos estas funciones para preguntar por prety URL
 
         if(isset($_GET['almacenamientoporgb'])){
@@ -53,59 +57,75 @@ class ReacondicionadosController{
             $porRam = $this->model->getRam();
             $this->view->verRam($porRam);
             };
-    */  }
-    
-   /* function verModeloPorMarca($id){
+    */
+    }
+
+    /* function verModeloPorMarca($id){
         $logueado = $this->accesoHelper->checkLoggedIn();
         $marcas = $this->marcasModel->getMarcas($id);
         $modeloPorMarca = $this->model->getModelosPorMarca($id);
         $this->view->verModeloPorMarca($marcas, $modeloPorMarca, $logueado);
     }  */
 
- function verAlmacenamiento($almacenamiento){
-        $almacenamiento= $this->model->getAlmacenamiento();
+    function verAlmacenamiento($almacenamiento)
+    {
+        $almacenamiento = $this->model->getAlmacenamiento();
         $this->view->verAlmacenamiento($almacenamiento);
     }
 
-    function verPorAlmacenamiento($porAlmacenamiento){ 
+    function verPorAlmacenamiento($porAlmacenamiento)
+    {
         $logueado = $this->accesoHelper->checkLoggedIn();
-        $porAlmacenamiento= $this->model->getModelosPorAlmacenamiento($porAlmacenamiento);
+        $porAlmacenamiento = $this->model->getModelosPorAlmacenamiento($porAlmacenamiento);
         $this->view->verPorAlmacenamiento($porAlmacenamiento, $logueado);
     }
 
-    function verRam(){
+    function verRam()
+    {
         $porRam = $this->model->getRam();
         $this->view->verRam($porRam);
     }
 
-    function verPorRam($porRam){
+    function verPorRam($porRam)
+    {
         $logueado = $this->accesoHelper->checkLoggedIn();
         $porRam = $this->model->getModelosPorRam($porRam);
         $this->view->verPorRam($porRam, $logueado);
     }
 
-    function verEditar($reacondicionado){
+    function verEditar($reacondicionado)
+    {
         $logueado = $this->accesoHelper->checkLoggedIn();
         $this->view->verEdicion($reacondicionado, $logueado);
     }
-    
-    function verAgregar(){
+
+    function verAgregar()
+    {
         $this->view->verAgregar();
     }
-    
-    function verCaracteristicas($id){
+
+    function verCaracteristicas($id)
+    {
         $logueado = $this->accesoHelper->checkLoggedIn();
         $reacondicionado = $this->model->getReacondicionado($id);
         $cantReacondicionados = count($reacondicionado);
-        $this->view->verCaracteristicas($reacondicionado, $logueado, $cantReacondicionados);     
+        $this->view->verCaracteristicas($reacondicionado, $logueado, $cantReacondicionados);
     }
-    
-    function createReacondicionado(){
+
+    function createReacondicionado()
+    {
         $logueado = $this->accesoHelper->checkLoggedIn();
-        if (isset($_POST['marca'],$_POST['modelo'], $_POST['precio'],
-                 $_POST['almacenamiento'],$_POST['pantalla'],$_POST['ram'],
-                 $_POST['bateria'], $_POST['stock']  )){
-        
+        if (isset(
+            $_POST['marca'],
+            $_POST['modelo'],
+            $_POST['precio'],
+            $_POST['almacenamiento'],
+            $_POST['pantalla'],
+            $_POST['ram'],
+            $_POST['bateria'],
+            $_POST['stock']
+        )) {
+
             $marca = $_POST['marca'];
             $modelo = $_POST['modelo'];
             $precio = $_POST['precio'];
@@ -115,91 +135,99 @@ class ReacondicionadosController{
             $ram = $_POST['ram'];
             $bateria = $_POST['bateria'];
             $stock = $_POST['stock'];
-        
-            if ($logueado['rol'] >= 1){                       
-                $this->model->createReacondicionado($marca, $modelo, $precio, $codigo, $almacenamiento, 
-                                                    $pantalla, $ram, $bateria, $stock);
+
+            if ($logueado['rol'] >= 1) {
+                $this->model->createReacondicionado(
+                    $marca,
+                    $modelo,
+                    $precio,
+                    $codigo,
+                    $almacenamiento,
+                    $pantalla,
+                    $ram,
+                    $bateria,
+                    $stock
+                );
                 $this->view->showHomeLocation("verReacondicionados");
-                } 
-                else { 
+            } else {
                 $this->view->showError("Faltan datos");
-                $this->view->verAgregar();// o una o la otra
-            } 
+                $this->view->verAgregar(); // o una o la otra
+            }
         }
     }
 
-    function updateReacondicionado($id){
+    function updateReacondicionado($id)
+    {
         $logueado = $this->accesoHelper->checkLoggedIn();
-        if ($logueado['rol'] == 1){
-        if (isset($_POST['marca'],$_POST['modelo'], $_POST['precio'],
-                  $_POST['almacenamiento'],$_POST['pantalla'],$_POST['ram'],
-                  $_POST['bateria'], $_POST['stock']  )){
+        if ($logueado['rol'] == 1) {
+            if (isset(
+                $_POST['marca'],
+                $_POST['modelo'],
+                $_POST['precio'],
+                $_POST['almacenamiento'],
+                $_POST['pantalla'],
+                $_POST['ram'],
+                $_POST['bateria'],
+                $_POST['stock']
+            )) {
 
-            $marca = $_POST['marca'];
-            $modelo = $_POST['modelo'];
-            $precio = $_POST['precio'];
-            $codigo = $_POST['codigo'];
-            $almacenamiento = $_POST['almacenamiento'];
-            $pantalla = $_POST['pantalla'];
-            $ram = $_POST['ram'];
-            $bateria = $_POST['bateria'];
-            $stock = $_POST['stock'];
+                $marca = $_POST['marca'];
+                $modelo = $_POST['modelo'];
+                $precio = $_POST['precio'];
+                $codigo = $_POST['codigo'];
+                $almacenamiento = $_POST['almacenamiento'];
+                $pantalla = $_POST['pantalla'];
+                $ram = $_POST['ram'];
+                $bateria = $_POST['bateria'];
+                $stock = $_POST['stock'];
+            }
+
+            $this->model->updateReacondicionadoFromDB($id, $marca, $modelo, $precio, $codigo, $almacenamiento, $pantalla, $ram, $bateria, $stock);
+            $this->view->showHomeLocation("verReacondicionados");
+        } else {
+            $this->view->showHomeLocation("homestart");
         }
-       
-        $this->model->updateReacondicionadoFromDB($id, $marca, $modelo, $precio, $codigo, $almacenamiento, $pantalla, $ram, $bateria, $stock);
-        $this->view->showHomeLocation("verReacondicionados");
-        } 
-        else { $this->view->showHomeLocation("homestart");
-        } 
     }
 
-   function deleteReacondicionado($id){
+    function deleteReacondicionado($id)
+    {
         $logueado = $this->accesoHelper->checkLoggedIn();
-        if ($logueado['rol'] == 1){
+        if ($logueado['rol'] == 1) {
             $this->model->deleteReacondicionadoFromDB($id);
             $this->view->showHomeLocation("verReacondicionados");
+        } else {
+            $this->view->showHomeLocation("homestart");
         }
-        else { $this->view->showHomeLocation("homestart");
-        } 
     }
 
-    function filtrado(){
-        if(isset($_POST['modelo'])){
-        $modelo = $_POST['modelo'];
-        }else {
+    function filtrado()
+    {
+        if (isset($_POST['modelo'])) {
+            $modelo = $_POST['modelo'];
+        } else {
             $this->view->showError("Debe Ingresar el nombre del equipo a buscar");
         }
         $modelos = $this->model->getByModel($modelo);
-        if( $modelos){
-        $this->view->verFiltro($modelos);
-    }
-    else { $this->view->showError("Debe Ingresar el nombre del equipo a buscar");
+        if ($modelos) {
+            $this->view->verFiltro($modelos);
+        } else {
+            $this->view->showError("Debe Ingresar el nombre del equipo a buscar");
         }
-   
-}
-    public function getReacondicionadosPaginados(){
-       $logueado = $this->accesoHelper->checkLoggedIn();
+    }
+    public function getReacondicionadosPaginados()
+    {
+        $logueado = $this->accesoHelper->checkLoggedIn();
         $limit = itemPorPagina;
         $offset = $this->helperPaginado->getOffset();
-        $totalPaginas = $this->helperPaginado->getPaginas();   
+        $totalPaginas = $this->helperPaginado->getPaginas();
         if (isset($_GET['pagina']))
             $pagina = $_GET['pagina'];
         else
             $pagina = 1;
-        $reacondicionados = $this->model->getReacondicionadosPaginados($limit,$offset);
+        $reacondicionados = $this->model->getReacondicionadosPaginados($limit, $offset);
         $cantReacondicionados = $this->model->getReacondicionadoMultitabla();
-       
-        $this->view->verReacondicionados($reacondicionados, $logueado, $totalPaginas,$pagina, $cantReacondicionados);
+
+        $this->view->verReacondicionados($reacondicionados, $logueado, $totalPaginas, $pagina, $cantReacondicionados);
         $cantReacondicionados = count($cantReacondicionados);
     }
 }
-
-?>
-
-
-    
-
-
-
-
-

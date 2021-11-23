@@ -6,8 +6,13 @@
     <table class="table">
     
         <tr>
-            <td><a href="caracteristicas/{$reacondicionado->id_reacondicionado}">{$reacondicionado->modelo}</a></td>
-            </tr>
+            <td>Modelo</td>
+        </tr>
+        
+        {foreach from=$reacondicionados item=$reacondicionado}
+            <tr>
+                <td><a href="caracteristicas/{$reacondicionado->id_reacondicionado}">{$reacondicionado->modelo}</a></td>
+                </tr>
         {/foreach}}
 
     </table> 
