@@ -1,5 +1,4 @@
 {{include file='templates/header.tpl'}}
-<script src="js/coment.js"></script>
 
 <div>
     <h1 class="h1">{$titulo}</h1>

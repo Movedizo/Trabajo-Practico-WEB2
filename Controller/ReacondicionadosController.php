@@ -77,7 +77,9 @@ class ReacondicionadosController
     {
         $logueado = $this->accesoHelper->checkLoggedIn();
         $porAlmacenamiento = $this->model->getModelosPorAlmacenamiento($porAlmacenamiento);
-        $this->view->verPorAlmacenamiento($porAlmacenamiento, $logueado);
+        $cantReacondicionados = count($porAlmacenamiento);
+
+        $this->view->verPorAlmacenamiento($porAlmacenamiento, $logueado, $cantReacondicionados);
     }
 
     function verRam()
@@ -90,7 +92,9 @@ class ReacondicionadosController
     {
         $logueado = $this->accesoHelper->checkLoggedIn();
         $porRam = $this->model->getModelosPorRam($porRam);
-        $this->view->verPorRam($porRam, $logueado);
+        $cantReacondicionados = count($porRam);
+
+        $this->view->verPorRam($porRam, $logueado, $cantReacondicionados);
     }
 
     function verEditar($reacondicionado)
@@ -214,20 +218,19 @@ class ReacondicionadosController
             $this->view->showError("Debe Ingresar el nombre del equipo a buscar");
         }
     }
-    public function getReacondicionadosPaginados()
-    {
+    function getReacondicionadosPaginados(){
         $logueado = $this->accesoHelper->checkLoggedIn();
         $limit = itemPorPagina;
         $offset = $this->helperPaginado->getOffset();
         $totalPaginas = $this->helperPaginado->getPaginas();
         if (isset($_GET['pagina']))
             $pagina = $_GET['pagina'];
-        else
+        else{
             $pagina = 1;
+        }
         $reacondicionados = $this->model->getReacondicionadosPaginados($limit, $offset);
         $cantReacondicionados = $this->model->getReacondicionadoMultitabla();
-
-        $this->view->verReacondicionados($reacondicionados, $logueado, $totalPaginas, $pagina, $cantReacondicionados);
         $cantReacondicionados = count($cantReacondicionados);
+        $this->view->verPaginado($reacondicionados, $logueado, $totalPaginas, $pagina, $cantReacondicionados);
     }
 }

@@ -50,23 +50,23 @@
     </nav>
 {/if}
 
-<div id="form-crear-comentario" data-id_usuario= "{$id_usuario}" data-id_reacondicionado="  {$reacondicionado->id_reacondicionado}">
-    {if $cantReacondicionados < 1} 
-        {include file="templates/coments.tpl"}
-    {/if}
-</div>
 
-<div>
+<div>    
+{if $cantReacondicionados <= 1} 
+        {include file="templates/coments.tpl"}
     {if $rol >=1} 
     <h2>Agrega un Comentario</h2>
-    <form id="formcoment">
+    <form id="form-crear-comentario" data-id_usuario= "{$usuario}" data-id_reacondicionado="  {$reacondicionado->id_reacondicionado}">
         <label class="form-label">Comentario</label>
         <input type="text"  id="comentario" name="comentario">
         <label class="form-label">Puntaje</label>
         <input type="text" id="puntaje" name="puntaje">
     </form>
     <button type="submit" id="btn-coment">Enviar</button>
-    {/if}    
+    {/if}  
+{/if}  
 </div>
+
+<script src="js/coment.js"></script>
 
 {include file='templates/footer.tpl'}

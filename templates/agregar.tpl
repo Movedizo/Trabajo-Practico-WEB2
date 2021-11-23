@@ -4,7 +4,6 @@
     <div>
         <h2>Añadir Marcas de Celulares</h2>
         <form action="createMarca" method="POST" enctype="multipart/form-data">
-
             <input type="text" placeholder="Marca" name="marca" id="marca">
             <input type="file" name="imagen" id="imagen">
             <input type="text" placeholder="Sistema Operativo" name="sistemaoperativo" id="sistemaoperativo">
