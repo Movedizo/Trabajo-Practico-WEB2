@@ -6,17 +6,16 @@
         <form action="createMarca" method="POST" enctype="multipart/form-data">
 
             <input type="text" placeholder="Marca" name="marca" id="marca">
-            <input type="file" name="marca" id="imagen">
+            <input type="file" name="imagen" id="imagen">
             <input type="text" placeholder="Sistema Operativo" name="sistemaoperativo" id="sistemaoperativo">
             <input type="submit" Enviar>
             
         </form>
 
         <h2>Añadir Celulares Reacondicionados</h2>
-        <form action="createReacondicionado" method="POST" enctype="multipart/form-data">
+        <form action="createReacondicionado" method="POST">
 
             <input type="text" placeholder="Marca" name="marca" id="marca">
-            <input type="file" name="modelo" id="imagen">
             <input type="text" placeholder="Modelo" name="modelo" id="modelo">
             <input type="number" placeholder="Precio" name="precio" id="precio">
             <input type="text" placeholder="Codigo" name="codigo" id="codigo">

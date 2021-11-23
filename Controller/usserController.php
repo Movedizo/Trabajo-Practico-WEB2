@@ -18,7 +18,6 @@ class UsserController {
 
     function vercreateUsser(){
         $this->view->showCreateUsser();
-    
     }
 
     function verUsuarios(){
@@ -59,7 +58,6 @@ class UsserController {
         if($logueado['rol']== 2){
         $this->model->deleteUsuario($idUsuario);
         $this->view->showHome('usuarios');
-
         }
     }
 }

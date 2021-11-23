@@ -32,7 +32,7 @@ class MarcasController{
 
         $this->authHelper->checkLoggedIn();
         if (isset($_POST['marca']) && isset($_POST['sistemaoperativo']) && ($_POST['marca'] != '')
-            && ($_POST['sistemaoperativo'] != '')){
+            && ($_POST['sistemaoperativo'] != '') && ($_POST['imagen']!= '')){
 
             $marca = $_POST["marca"];
             $sistemaoperativo = $_POST["sistemaoperativo"];
