@@ -49,7 +49,7 @@
             $ingresoController->verificacionIngreso(); 
             break;
         case 'verReacondicionados': 
-            $reacondicionadosController->verReacondicionados(); 
+            $reacondicionadosController->getReacondicionadosPaginados(); 
             break; 
         case 'marca': 
             $marcasController->verMarcas();

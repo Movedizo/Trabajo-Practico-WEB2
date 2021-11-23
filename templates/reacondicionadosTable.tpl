@@ -39,31 +39,37 @@
     </table> 
 </div>
 
+{if $cantReacondicionados > 1} 
 
 <nav aria-label="Paginacion">
 <ul class="pagination">
    
 
 <li class="page-item"> <a class="page-link"
-    href="#">Anterior</a></li>
+    href="verReacondicionados/?pagina={$pagina-1}">Anterior</a></li>
     
     
-    {for $i= 0; $i<$paginas; $i++}
+    {for $i= 1; $i < $totalPaginas; $i++}
         
-       <li class="page-item"><a class="page-link" href="pagina.php?{$i}">{$i}</a></li>
+       <li class="page-item"><a class="page-link" href="verReacondicionados/?pagina={$i}">{$i}</a></li>
     {/for}
  
     <li class="page-item"> <a class="page-link"
-    href="#">Siguiente</a></li>
+    href="verReacondicionados/?pagina={$pagina + 1}">Siguiente</a></li>
 </nav>
 
-
+{/if}
 <div id="form-crear-comentario" data-id_usuario= "{$id_usuario}" data-id_reacondicionado="{$reacondicionado->id_reacondicionado}">
-{include file="templates/coments.tpl"}
+{if $cantReacondicionados < 1} 
+    {include file="templates/coments.tpl"}
+{/if}
+
 </div>
 <div>
-<h2>Agrega un Comentario</h2>
-  <form id="formcoment">
+{if $rol >=1}
+    
+    <h2>Agrega un Comentario</h2>
+    <form id="formcoment">
     <label class="form-label">Comentario</label>
     <input type="text"  id="comentario" name="comentario" >
     <label class="form-label">Puntaje</label>
@@ -71,4 +77,5 @@
     </form>
     <button type="submit" id="btn-coment">Enviar</button>     
 </div>
+{/if}
 {include file='templates/footer.tpl'}

@@ -23,7 +23,7 @@ class ComentsModel{
     }
 
     function createComent($id_reacondicionado, $id_usuario,$comentario, $puntaje, $fecha){
-        $sentencia = $this->db->prepare("INSERT INTO comentarios(id_usuario, id_reacondicionado, comentario, puntaje, fecha) VALUES(?,?,?,?,?");
+        $sentencia = $this->db->prepare("INSERT INTO comentarios(null, id_usuario, id_reacondicionado, comentario, puntaje, fecha) VALUES(?,?,?,?,?");
         $sentencia->execute(array( $id_reacondicionado, $id_usuario,$comentario, $puntaje, $fecha));
         $id=$this->db->lastInsertId();
         return $id;

@@ -32,7 +32,7 @@ class ReacondicionadoView {
     }
 
     function verPorAlmacenamiento($porAlmacenamiento, $logueado){
-        $this->smarty->assign('logueado', $logueado['rol']);
+        $this->smarty->assign('rol', $logueado['rol']);
         $this->smarty->assign('titulo', "Lista de Celulares Por Almacenamiento");
         $this->smarty->assign('reacondicionados', $porAlmacenamiento);
         $this->smarty->display('templates/reacondicionadosTable.tpl');   
@@ -52,17 +52,21 @@ class ReacondicionadoView {
     }
 
     function verPorRam($porRam, $logueado){
-        $this->smarty->assign('logueado', $logueado['rol']);
+        $this->smarty->assign('rol', $logueado['rol']);
         $this->smarty->assign('titulo', "Lista de Celulares Por Velocidad de Procesamiento");
         $this->smarty->assign('reacondicionados', $porRam);
         $this->smarty->display('templates/reacondicionadosTable.tpl');   
     }
     
 
-    function verReacondicionados($reacondicionados,$logueado){
-        $this->smarty->assign('rol', $logueado['rol']);
+    function verReacondicionados($reacondicionados, $logueado, $totalPaginas,$pagina, $cantReacondicionados){
+        $this->smarty->assign('totalPaginas', $totalPaginas);
         $this->smarty->assign('reacondicionados', $reacondicionados);
-        $this->smarty->display('templates/reacondicionadosTable.tpl');
+        $this->smarty->assign('cantReacondicionados', $cantReacondicionados);
+
+        $this->smarty->assign('pagina', $pagina);
+        $this->smarty->assign('rol', $logueado['rol']);
+        $this->smarty->display('templates/reacondicionadosTable.tpl');   
     }
  
     function verEdicion($reacondicionado){
@@ -74,12 +78,14 @@ class ReacondicionadoView {
         $this->smarty->display('templates/agregar.tpl');
     }
 
-    function verCaracteristicas($reacondicionado, $logueado){
+    function verCaracteristicas($reacondicionado, $logueado, $cantReacondicionados){
         $this->smarty->assign('rol', $logueado['rol']);
         $this->smarty->assign('id_usuario', $logueado['id_usuario']);
         $this->smarty->assign('titulo', "Detalles del Reacondicionado");
         $this->smarty->assign('reacondicionados', $reacondicionado);
-        $this->smarty->display('templates/reacondicionadosTable.tpl');   
+        $this->smarty->assign('cantReacondicionados', $cantReacondicionados);
+        $this->smarty->display('templates/reacondicionadosTable.tpl'); 
+
     }
     function showError($error){
         echo($error);
@@ -87,11 +93,11 @@ class ReacondicionadoView {
 
     }
 
-    function verPaginado($totalPaginas, $reacondicionados, $logueado){
+    function verPaginado($totalPaginas, $reacondicionados, $logueado, $pagina){
+        $this->smarty->assign('totalPaginas', $totalPaginas);
         $this->smarty->assign('reacondicionados', $reacondicionados);
+        $this->smarty->assign('pagina', $pagina);
         $this->smarty->assign('rol', $logueado['rol']);
-
-        $this->smarty->assign('paginas' , $totalPaginas);
         $this->smarty->display('templates/reacondicionadosTable.tpl');   
     }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-10-2021 a las 00:15:17
+-- Tiempo de generación: 22-11-2021 a las 19:16:50
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.3.28
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `csv_db 6`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comentarios`
+--
+
+CREATE TABLE `comentarios` (
+  `id_usuario` int(50) NOT NULL,
+  `id_comentario` int(50) NOT NULL,
+  `id_reacondicionado` int(50) NOT NULL,
+  `comentario` varchar(200) NOT NULL,
+  `puntaje` int(1) NOT NULL,
+  `fecha` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `comentarios`
+--
+
+INSERT INTO `comentarios` (`id_usuario`, `id_comentario`, `id_reacondicionado`, `comentario`, `puntaje`, `fecha`) VALUES
+(1, 1, 50, 'Este Celular no funciona mas', 1, '2021-12-10'),
+(2, 2, 51, 'Celular fuera de mercado', 1, '0000-00-00'),
+(2, 3, 51, 'Celular fuera de mercado', 1, '2021-12-12');
 
 -- --------------------------------------------------------
 
@@ -233,7 +257,8 @@ INSERT INTO `reacondicionados` (`id_reacondicionado`, `id_marca`, `modelo`, `pre
 (163, 8, 'iPhone 6s 32Gb', '15600', 'A1633', '32Gb', '\"4.7\"\"\"', '2Gb', '1715mAh', 0),
 (164, 8, 'iPhone 6s 64Gb', '23140', 'A1688', '64Gb', '\"4.7\"\"\"', '2Gb', '1715mAh', 0),
 (165, 8, 'iPhone 6 64Gb', '16640', 'A1549', '64Gb', '\"4.7\"\"\"', '1Gb', '1810mAh', 0),
-(171, 2, 'Nuevo Agregado', '123213', '2221', '124', '5', '8', '12000', 1);
+(171, 2, 'Nuevo Agregado', '123213', '2221', '124', '5', '8', '12000', 1),
+(181, 1, 'prueba', '123', '123', '123', '123', '123', '123', 1);
 
 -- --------------------------------------------------------
 
@@ -244,19 +269,31 @@ INSERT INTO `reacondicionados` (`id_reacondicionado`, `id_marca`, `modelo`, `pre
 CREATE TABLE `usuario` (
   `id` int(100) NOT NULL,
   `usuario` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `password` varchar(100) NOT NULL,
+  `rol` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `usuario`, `password`) VALUES
-(1, 'NachoRamiro', '$2y$10$Z.jdsFHd14uK9XWwtrjUMuLWb2aLk2tRLnbD7uDzJGbdOAcErSrii');
+INSERT INTO `usuario` (`id`, `usuario`, `password`, `rol`) VALUES
+(1, 'Admin', '$2y$10$Z.jdsFHd14uK9XWwtrjUMuLWb2aLk2tRLnbD7uDzJGbdOAcErSrii', 2),
+(2, 'Usernoadmin', '$2y$10$7SwZvvQjwoJ9ajI821Dtlu3PxxDdXK4iOg5b.lpOfuGYdx.UFKUW.', 1),
+(5, 'cuenta4', '$2y$10$D/VFfw64GJM7BcNkjDTpaOX0jFbRW1UB/P/ykRN9pcagTQey4bMku', 0),
+(6, 'nacho', '$2y$10$4PfTJvND8Fz1Dev6u/UsmeQ0jEiiYZN8A0JUSJYxxi1TOZ/zrcOP6', 0);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`id_comentario`),
+  ADD KEY `id_reacondicionado` (`id_reacondicionado`),
+  ADD KEY `id_usuario` (`id_usuario`);
 
 --
 -- Indices de la tabla `marcas`
@@ -270,7 +307,8 @@ ALTER TABLE `marcas`
 ALTER TABLE `reacondicionados`
   ADD PRIMARY KEY (`id_reacondicionado`),
   ADD KEY `id_marca` (`id_marca`),
-  ADD KEY `id_marca_2` (`id_marca`);
+  ADD KEY `id_marca_2` (`id_marca`),
+  ADD KEY `modelo_2` (`modelo`);
 
 --
 -- Indices de la tabla `usuario`
@@ -283,6 +321,12 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  MODIFY `id_comentario` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `marcas`
 --
 ALTER TABLE `marcas`
@@ -292,17 +336,24 @@ ALTER TABLE `marcas`
 -- AUTO_INCREMENT de la tabla `reacondicionados`
 --
 ALTER TABLE `reacondicionados`
-  MODIFY `id_reacondicionado` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
+  MODIFY `id_reacondicionado` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD CONSTRAINT `comentarios_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`),
+  ADD CONSTRAINT `comentarios_ibfk_3` FOREIGN KEY (`id_reacondicionado`) REFERENCES `reacondicionados` (`id_reacondicionado`);
 
 --
 -- Filtros para la tabla `reacondicionados`

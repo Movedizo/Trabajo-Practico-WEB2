@@ -5,12 +5,14 @@ require_once "./View/ReacondicionadoView.php";
 require_once "./Model/MarcasModel.php";
 require_once "./View/MarcasView.php";
 require_once "./Helpers/AccesoHelper.php";
-
+require_once "./Helpers/HelperPaginado.php";
+const itemsPorPagina = 10;
 class ReacondicionadosController{
 
     private $model;
     private $view;
     private $accesoHelper;
+    private $helperPaginado;
 
     function __construct(){
         $this->model = new ReacondicionadoModel();
@@ -18,6 +20,7 @@ class ReacondicionadosController{
         $this->marcasModel = new MarcasModel();
         $this->marcasView = new MarcasView();
         $this->accesoHelper = new AccesoHelper();
+        $this->helperPaginado = new HelperPaginado();
     }
 
     function verUsuario(){
@@ -26,6 +29,26 @@ class ReacondicionadosController{
         $this->view->verUsuario();
     }
 
+    /*function verReacondicionadosFull($id= NULL){
+        $logueado = $this->accesoHelper->checkLoggedIn();
+        if(isset($_GET['modelo'])){
+            var_dump($_GET['modelo']);
+            $marcas = $this->marcasModel->getMarcas($id);
+            $modeloPorMarca = $this->model->getModelosPorMarca($id);
+            $this->view->verModeloPorMarca($marcas, $modeloPorMarca, $logueado);
+        }
+        if(isset($_GET['almacenamientoporgb'])){
+            $porAlmacenamiento = $_GET['almacenamiento'];
+            $porAlmacenamiento= $this->model->getModelosPorAlmacenamiento($porAlmacenamiento);
+            $this->view->verPorAlmacenamiento($porAlmacenamiento, $logueado);
+        }
+        if(isset($_GET['ram'])){
+            $porRam = $_GET['ram'];
+            $porRam = $this->model->getRam();
+            $this->view->verRam($porRam);
+            };
+        }
+    */
     function verModeloPorMarca($id){
         $logueado = $this->accesoHelper->checkLoggedIn();
         $marcas = $this->marcasModel->getMarcas($id);
@@ -33,7 +56,7 @@ class ReacondicionadosController{
         $this->view->verModeloPorMarca($marcas, $modeloPorMarca, $logueado);
     }  
 
-    function verAlmacenamiento($almacenamiento){
+ function verAlmacenamiento($almacenamiento){
         $almacenamiento= $this->model->getAlmacenamiento($almacenamiento);
         $this->view->verAlmacenamiento($almacenamiento);
     }
@@ -55,11 +78,6 @@ class ReacondicionadosController{
         $this->view->verPorRam($porRam, $logueado);
     }
 
-    function verReacondicionados(){
-        $logueado = $this->accesoHelper->checkLoggedIn();
-        $reacondicionados = $this->model->getReacondicionadoMultitabla();
-        $this->view->verReacondicionados($reacondicionados, $logueado);
-    }
     
 
     function verEditar($reacondicionado){
@@ -74,7 +92,8 @@ class ReacondicionadosController{
     function verCaracteristicas($id){
         $logueado = $this->accesoHelper->checkLoggedIn();
         $reacondicionado = $this->model->getReacondicionado($id);
-        $this->view->verCaracteristicas($reacondicionado, $logueado);     
+        $cantReacondicionados = count($reacondicionado);
+        $this->view->verCaracteristicas($reacondicionado, $logueado, $cantReacondicionados);     
     }
     
 
@@ -145,21 +164,23 @@ class ReacondicionadosController{
 
 
 
- function getReacondicionadosPaginados(){
-     $itemPorPagina = 10;
-     $pagina = 1;
-    $reacondicionados = $this->model->getReacondicionadosPaginados($itemPorPagina,$pagina);
-    $totalReacondicionados = $this->model->getTotalReacondiconados();
-    $logueado = $this->accesoHelper->checkLoggedIn();
+ 
+    public function getReacondicionadosPaginados(){
+       $logueado = $this->accesoHelper->checkLoggedIn();
+        $limit = itemPorPagina;
+        $offset = $this->helperPaginado->getOffset();
+        $totalPaginas = $this->helperPaginado->getPaginas();   
+        if (isset($_GET['pagina']))
+            $pagina = $_GET['pagina'];
+        else
+            $pagina = 1;
+        $reacondicionados = $this->model->getReacondicionadosPaginados($limit,$offset);
+        $cantReacondicionados = $this->model->getReacondicionadoMultitabla();
+       
+        $this->view->verReacondicionados($reacondicionados, $logueado, $totalPaginas,$pagina, $cantReacondicionados);
+        $cantReacondicionados = count($cantReacondicionados);
+    }
 
-   $totalPaginas = ($totalReacondicionados / $itemPorPagina);
-   $totalPaginas = ceil($totalPaginas);
-   $this->view->verPaginado($totalPaginas, $reacondicionados, $logueado);
-
-
-
-
- }
 }
 
 

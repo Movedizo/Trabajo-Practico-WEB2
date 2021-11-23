@@ -81,14 +81,12 @@ class ReacondicionadoModel{
         return $reacondicionado;
     }
 
-    function getReacondicionadosPaginados($itemPorPagina, $pagina){
-        $sentencia = $this->db->prepare("SELECT * FROM reacondicionados as r 
-        INNER JOIN marcas as m ON r.id_marca=m.id_marca LIMIT :inicio, :itemPorPagina");
-        $sentencia->bindParam(':inicio', $pagina, PDO::PARAM_INT);
-        $sentencia->bindParam(' :itemPorPagina',$itemPorPagina, PDO::PARAM_INT);
-        $sentencia->execute();
-        $reacondicionados= $sentencia->fetchAll(PDO::FETCH_OBJ);
-        return $reacondicionados;
-
+    function getReacondicionadosPaginados($limit, $offset){
+        $sentencia = $this->db->prepare("SELECT * FROM reacondicionados as r INNER JOIN marcas as m ON r.id_marca=m.id_marca LIMIT ? OFFSET ?");
+$sentencia->bindParam(1, $limit, PDO::PARAM_INT);
+$sentencia->bindParam(2, $offset, PDO::PARAM_INT);
+$sentencia->execute();
+$reacondicionados = $sentencia->fetchAll(PDO::FETCH_OBJ);
+return $reacondicionados;
     }
 }
