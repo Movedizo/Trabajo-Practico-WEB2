@@ -76,15 +76,25 @@ switch ($params[0]){
         $reacondicionadosController->verRam();
     break;
     case 'pagina':
-        $reacondicionadosController->getReacondicionadosPaginados();    
+        $reacondicionadosController->getReacondicionadosPaginados();
+    break;   
     case 'agregar':
         $reacondicionadosController->verAgregar();
-    break;     
+    break;
+    case 'agregarMarca':
+        $marcasController->agregarMarca();
+    break;
     case 'eliminar': 
         $reacondicionadosController->deleteReacondicionado($params[1]); 
     break;
+    case 'eliminarMarca': 
+        $marcasController->deleteMarca($params[1]); 
+    break;
     case 'updateReacondicionado': 
         $reacondicionadosController->updateReacondicionado($params[1]); 
+    break;
+    case 'updateMarca': 
+        $marcasController->updateMarca($params[1]); 
     break;
     case 'editar':
         $reacondicionadosController->verEditar($params[1]);
