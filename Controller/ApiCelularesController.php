@@ -87,5 +87,6 @@ class ApiCelularesController{
         $bodyString = file_get_contents("php://input");
         return json_decode($bodyString);
     }
-
 }
+
+?>

@@ -8,6 +8,7 @@ require_once "./Helpers/AccesoHelper.php";
 require_once "./Helpers/HelperPaginado.php";
 
 const itemsPorPagina = 10;
+
 class ReacondicionadosController{
 
     private $model;
@@ -50,6 +51,7 @@ class ReacondicionadosController{
             };
         }
     */
+
     function verModeloPorMarca($id){
         $logueado = $this->accesoHelper->checkLoggedIn();
         $marcas = $this->marcasModel->getMarcas($id);
@@ -57,7 +59,7 @@ class ReacondicionadosController{
         $this->view->verModeloPorMarca($marcas, $modeloPorMarca, $logueado);
     }  
 
- function verAlmacenamiento($almacenamiento){
+    function verAlmacenamiento($almacenamiento){
         $almacenamiento= $this->model->getAlmacenamiento($almacenamiento);
         $this->view->verAlmacenamiento($almacenamiento);
     }
@@ -79,8 +81,6 @@ class ReacondicionadosController{
         $this->view->verPorRam($porRam, $logueado);
     }
 
-    
-
     function verEditar($reacondicionado){
         $logueado = $this->accesoHelper->checkLoggedIn();
         $this->view->verEdicion($reacondicionado, $logueado);
@@ -97,36 +97,34 @@ class ReacondicionadosController{
         $this->view->verCaracteristicas($reacondicionado, $logueado, $cantReacondicionados);     
     }
     
-
-    
     function createReacondicionado(){
         $logueado = $this->accesoHelper->checkLoggedIn();
-      if (isset($_POST['marca'],$_POST['modelo'], $_POST['precio'],
+        if (isset($_POST['marca'],$_POST['modelo'], $_POST['precio'],
                  $_POST['almacenamiento'],$_POST['pantalla'],$_POST['ram'],
                  $_POST['bateria'], $_POST['stock']  )){
         
-        $marca = $_POST['marca'];
-        $modelo = $_POST['modelo'];
-        $precio = $_POST['precio'];
-        $codigo = $_POST['codigo'];
-        $almacenamiento = $_POST['almacenamiento'];
-        $pantalla = $_POST['pantalla'];
-        $ram = $_POST['ram'];
-        $bateria = $_POST['bateria'];
-        $stock = $_POST['stock'];
+            $marca = $_POST['marca'];
+            $modelo = $_POST['modelo'];
+            $precio = $_POST['precio'];
+            $codigo = $_POST['codigo'];
+            $almacenamiento = $_POST['almacenamiento'];
+            $pantalla = $_POST['pantalla'];
+            $ram = $_POST['ram'];
+            $bateria = $_POST['bateria'];
+            $stock = $_POST['stock'];
         
-        if ($logueado['rol'] >= 1){                       
-            $this->model->createReacondicionado($marca, $modelo, $precio, $codigo, $almacenamiento, 
-                                                $pantalla, $ram, $bateria, $stock);
-            $this->view->showHomeLocation("verReacondicionados");
+            if ($logueado['rol'] >= 1){                       
+                $this->model->createReacondicionado($marca, $modelo, $precio, $codigo, $almacenamiento, 
+                                                    $pantalla, $ram, $bateria, $stock);
+                $this->view->showHomeLocation("verReacondicionados");
+                } 
+                else { 
+                $this->view->showError("Faltan datos");
+                $this->view->verAgregar();// o una o la otra
             } 
-            else { 
-            $this->view->showError("Faltan datos");
-            $this->view->verAgregar();// o una o la otra
-        } 
-
         }
     }
+
     function updateReacondicionado($id){
         $logueado = $this->accesoHelper->checkLoggedIn();
         if ($logueado['rol'] == 1){
@@ -134,15 +132,15 @@ class ReacondicionadosController{
                   $_POST['almacenamiento'],$_POST['pantalla'],$_POST['ram'],
                   $_POST['bateria'], $_POST['stock']  )){
 
-        $marca = $_POST['marca'];
-        $modelo = $_POST['modelo'];
-        $precio = $_POST['precio'];
-        $codigo = $_POST['codigo'];
-        $almacenamiento = $_POST['almacenamiento'];
-        $pantalla = $_POST['pantalla'];
-        $ram = $_POST['ram'];
-        $bateria = $_POST['bateria'];
-        $stock = $_POST['stock'];
+            $marca = $_POST['marca'];
+            $modelo = $_POST['modelo'];
+            $precio = $_POST['precio'];
+            $codigo = $_POST['codigo'];
+            $almacenamiento = $_POST['almacenamiento'];
+            $pantalla = $_POST['pantalla'];
+            $ram = $_POST['ram'];
+            $bateria = $_POST['bateria'];
+            $stock = $_POST['stock'];
         }
        
         $this->model->updateReacondicionadoFromDB($id, $marca, $modelo, $precio, $codigo, $almacenamiento, $pantalla, $ram, $bateria, $stock);
@@ -150,8 +148,7 @@ class ReacondicionadosController{
         } 
         else { $this->view->showHomeLocation("homestart");
         } 
-   }
-
+    }
 
    function deleteReacondicionado($id){
         $logueado = $this->accesoHelper->checkLoggedIn();
@@ -163,9 +160,6 @@ class ReacondicionadosController{
         } 
     }
 
-
-
- 
     public function getReacondicionadosPaginados(){
        $logueado = $this->accesoHelper->checkLoggedIn();
         $limit = itemPorPagina;
@@ -181,8 +175,9 @@ class ReacondicionadosController{
         $this->view->verReacondicionados($reacondicionados, $logueado, $totalPaginas,$pagina, $cantReacondicionados);
         $cantReacondicionados = count($cantReacondicionados);
     }
-
 }
+
+?>
 
 
     

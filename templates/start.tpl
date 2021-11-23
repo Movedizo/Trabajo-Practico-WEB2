@@ -9,19 +9,20 @@
         <li><a href="ram/">Velocidad de procesamiento</a></li>
         <li><a href="verReacondicionados/">Ver Lista de Equipos</a></li>
         {if $rol >= 1}
-        <li><a href="agregar/">Agregar</a></li>
-    {/if}
+            <li><a href="agregar/">Agregar</a></li>
+        {/if}
     </ul>  
 </nav>
+
 <div>
-{if $rol>=1}
-    <a href="logout">Logout</a>    
-{/if}        
+    {if $rol>=1}
+        <a href="logout">Logout</a>    
+    {/if}        
+    {if $rol == 2}
+        <a href="usuarios"> Usuarios</a>
+    {/if}
 
-{if $rol == 2}
-    <a href="usuarios"> Usuarios</a>
-{/if}
-
-<a href="home"> Volver</a>
+    <a href="home"> Volver</a>
 </div>
+
 {include file='templates/footer.tpl'}

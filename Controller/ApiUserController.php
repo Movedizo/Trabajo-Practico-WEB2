@@ -8,11 +8,13 @@ class ApiUserController{
     private $authHelper;
 
     function __construct(){
+
         $this->view = new ApiView();
         $this->authHelper = new AuthApiHelper();
     }
 
     function obtenerToken($params = null) {
+
         $userpass = $this->authHelper->getBasic();
         $user = array("user"=>$userpass["user"]);
     
@@ -26,6 +28,7 @@ class ApiUserController{
     }
 
     function obtenerUsuario($params = null){
+
         $id = $params[":ID"];
         $user = $this->authHelper->getUser();
         if($user)
@@ -40,3 +43,5 @@ class ApiUserController{
         }
     }
 }
+
+?>

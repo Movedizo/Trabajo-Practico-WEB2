@@ -8,8 +8,6 @@ class MarcasModel{
         $this->db = new PDO('mysql:host=localhost;' . 'dbname=csv_db 6;charset=utf8', 'root', '');
     }
 
-
-
     function getMarcas(){
         $sentencia = $this->db->prepare( "SELECT * FROM `marcas`" );
         $sentencia->execute();
@@ -34,3 +32,5 @@ class MarcasModel{
         return $marca;
     }
 }
+
+?>

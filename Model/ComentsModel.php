@@ -29,6 +29,6 @@ class ComentsModel{
         return $id;
         
     }
-
-
 }
+
+?>

@@ -17,6 +17,7 @@
             <input type="text" placeholder="Bateria" name="bateria" id="bateria">
             <input type="number" placeholder="stock" name="stock" id="stock">
             <input type="submit" Enviar>
+            
         </form>
     </div>
 </div>

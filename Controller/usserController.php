@@ -4,8 +4,6 @@ require_once "./Model/IngresoModel.php";
 require_once "./View/IngresoView.php";
 require_once "./Helpers/AccesoHelper.php";
 
-
-
 class UsserController {
 
     private $accesoHelper;
@@ -64,5 +62,6 @@ class UsserController {
 
         }
     }
-
 }
+
+?>
