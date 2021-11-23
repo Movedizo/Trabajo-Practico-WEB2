@@ -3,6 +3,7 @@
 <html lang="en">
 
 <head>
+
     <base href="{BASE_URL}"/>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
    
     <title>Celulares Reacondicionados Tandil</title>
+    
 </head>
 
 <body>

@@ -4,8 +4,6 @@ require_once "./Model/IngresoModel.php";
 require_once "./View/IngresoView.php";
 require_once "./Helpers/AccesoHelper.php";
 
-
-
 class UsserController {
 
     private $accesoHelper;
@@ -20,7 +18,6 @@ class UsserController {
 
     function vercreateUsser(){
         $this->view->showCreateUsser();
-    
     }
 
     function verUsuarios(){
@@ -61,8 +58,8 @@ class UsserController {
         if($logueado['rol']== 2){
         $this->model->deleteUsuario($idUsuario);
         $this->view->showHome('usuarios');
-
         }
     }
-
 }
+
+?>

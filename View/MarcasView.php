@@ -11,7 +11,16 @@ class MarcasView{
     }
 
     function verMarcas($marcas){
+
         $this->smarty->assign('marcas', $marcas);
         $this->smarty->display('templates/marcas.tpl');
     }
+
+    function verError($aviso){
+
+        $this->smarty->assign('aviso', $aviso);
+        $this->smarty->display('templates/marcas.tpl');
+    }
 }
+
+?>

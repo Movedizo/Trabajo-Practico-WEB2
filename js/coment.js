@@ -22,39 +22,43 @@ let app = new Vue({
         }
         catch (e) {
         console.log(e);
-    }
-    
+    }  
 }
+
 getComents();
 
 document.addEventListener('DOMContentLoaded', CrearComentarios);
+
 function CrearComentarios(){
-let btn = document.querySelector("#btn-coment").addEventListener("click", createComent);
 
+    let btn = document.querySelector("#btn-coment").addEventListener("click", createComent);
 
-async function createComent(){
+    async function createComent(){
 
-    let comentario = document.querySelector("#comentario").value;
-    let puntaje = document.querySelector("#puntaje").value;
-    
-    let comentarioJson= {
-        comentario :comentario,
-        puntaje: puntaje,
-        fecha:"2021/01/02",
-        id_reacondicionado:id_reacondicionado,
-        id_usuario: id_usuario
-    } 
-    try {
-        let respuesta = await fetch(urlApi+"/" + id_reacondicionado, {
-            method: "POST",
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify(comentarioJson),
-        });
-        if (respuesta.ok) {
-            console.log("Comentario cargado");
+        let comentario = document.querySelector("#comentario").value;
+        let puntaje = document.querySelector("#puntaje").value;
+        
+        let comentarioJson= {
+            comentario :comentario,
+            puntaje: puntaje,
+            fecha:"2021/01/02",
+            id_reacondicionado:id_reacondicionado,
+            id_usuario: id_usuario
+        } 
+
+        try {
+            let respuesta = await fetch(urlApi+"/" + id_reacondicionado, {
+                method: "POST",
+                headers: { "Content-type": "application/json" },
+                body: JSON.stringify(comentarioJson),
+            });
+            if (respuesta.ok) {
+                console.log("Comentario cargado");
+            }
+        } 
+        
+        catch (error) {
+            console.log(error);
         }
-    } catch (error) {
-        console.log(error);
     }
-}
 }

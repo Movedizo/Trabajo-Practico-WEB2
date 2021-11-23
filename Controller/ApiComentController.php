@@ -6,21 +6,21 @@ require_once "./View/ApiView.php";
 require_once "./Helpers/AccesoHelper.php";
 
 
-class ApiComentController
-{
+class ApiComentController{
+
     private $model;
     private $view;
     private $accesoHelper;
 
-    function __construct()
-    {
+    function __construct(){
+
         $this->accesoHelper = new AccesoHelper();
         $this->model = new ComentsModel();
         $this->view = new ApiView();
     }
 
-    function getComents($params = null)
-    {
+    function getComents($params = null){
+
         $idComent = $params[':ID'];
         if (!isset($idComent)) {
             $coments = $this->model->GetComents();
@@ -36,8 +36,8 @@ class ApiComentController
     }
 
 
-    function createComent($params = null)
-    {
+    function createComent($params = null){
+
         $logueado = $this->accesoHelper->checkLoggedIn();
         if ($logueado['rol'] >= 1) {
             $body = $this->getBody();
@@ -45,9 +45,12 @@ class ApiComentController
             $this->model->createComent($body->id_reacondicionado, $body->id_usuario, $body->comentario, $body->puntaje, $body->fecha);
         }
     }
-    private function getBody()
-    {
+
+    private function getBody(){
+
         $bodyString = file_get_contents("php://input");
         return json_decode($bodyString);
     }
 }
+
+?>

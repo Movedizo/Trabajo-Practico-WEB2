@@ -8,7 +8,8 @@
         <li>{{comentario.comentario}}</li>
          </ul>
 
- </div>        
+    </div>        
 
 {/literal}
+
 {include file='templates/footer.tpl'}

@@ -1,6 +1,5 @@
 {include file='templates/header.tpl'}
 
-
 <div>
     <table class="table">
         <tr>
@@ -16,7 +15,6 @@
             <td><a href="homestart">Inicio</a></td>
             <td><a href="logout">Salir</a></td>
         </tr>
-
         {foreach from=$reacondicionados item=$reacondicionado}
             <tr>
                 <td>{$reacondicionado->marca}</td>
@@ -85,18 +83,23 @@
     {include file="templates/coments.tpl"}
 {/if}
 
+<div id="form-crear-comentario" data-id_usuario= "{$id_usuario}" data-id_reacondicionado="  {$reacondicionado->id_reacondicionado}">
+    {if $cantReacondicionados < 1} 
+        {include file="templates/coments.tpl"}
+    {/if}
 </div>
+
 <div>
-{if $rol >=1}
-    
+    {if $rol >=1} 
     <h2>Agrega un Comentario</h2>
     <form id="formcoment">
-    <label class="form-label">Comentario</label>
-    <input type="text"  id="comentario" name="comentario" >
-    <label class="form-label">Puntaje</label>
-    <input type="text" id="puntaje" name="puntaje" >
+        <label class="form-label">Comentario</label>
+        <input type="text"  id="comentario" name="comentario">
+        <label class="form-label">Puntaje</label>
+        <input type="text" id="puntaje" name="puntaje">
     </form>
-    <button type="submit" id="btn-coment">Enviar</button>     
+    <button type="submit" id="btn-coment">Enviar</button>
+    {/if}    
 </div>
-{/if}
+
 {include file='templates/footer.tpl'}

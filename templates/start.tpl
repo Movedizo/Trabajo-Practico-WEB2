@@ -38,6 +38,7 @@
         <input type="submit"  value="Buscar">
         </form>
 
-<a href="home"> Volver</a>
+    <a href="home"> Volver</a>
 </div>
+
 {include file='templates/footer.tpl'}

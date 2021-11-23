@@ -2,6 +2,7 @@
 
 <div class= "lis-group">
     <div>
+    
         <h2>Editar  Roles de Usuarios del usuario {$usuario->id}</h2>
         <form action="updateUsuario/{$usuario->id}" method="POST">
             <input type="hidden" name="idUsuario" value="{$usuario->id}" id="idUsuario">
@@ -11,4 +12,5 @@
 
     </div>
 </div>
+
 {include file='templates/footer.tpl'}

@@ -28,3 +28,5 @@ class HelperPaginado {
         return $offset;
     }
 }
+
+?>
