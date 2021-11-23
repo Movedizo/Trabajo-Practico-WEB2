@@ -6,6 +6,7 @@ require_once "./Model/MarcasModel.php";
 require_once "./View/MarcasView.php";
 require_once "./Helpers/AccesoHelper.php";
 require_once "./Helpers/HelperPaginado.php";
+
 const itemsPorPagina = 10;
 class ReacondicionadosController{
 

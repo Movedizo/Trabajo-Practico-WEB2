@@ -3,6 +3,8 @@
     require_once 'Controller/ReacondicionadosController.php';
     require_once 'Controller/LoginController.php';
     require_once 'Controller/MarcasController.php';
+    require_once 'Controller/usserController.php';
+
 
     define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');   
 
@@ -17,7 +19,9 @@
 
     $marcasController = new MarcasController();
     $reacondicionadosController = new ReacondicionadosController();
-    $ingresoController = new IngresoController();
+    $loginController = new LoginController();
+    $usserController = new UsserController();
+
 
     switch ($params[0]){
 
@@ -31,22 +35,22 @@
             $ingresoController->showStart();
             break;
         case 'usuarios': 
-            $ingresoController->verUsuarios(); 
+            $usserController->verUsuarios(); 
             break;
         case 'usuario': 
             $reacondicionadosController->verUsuario(); 
             break;
         case 'registro':
-            $ingresoController->vercreateUsser();
+            $usserController->vercreateUsser();
             break;
         case 'createUsser':
-            $ingresoController->createUsser();
+            $usserController->createUsser();
             break;
         case 'logout': 
-            $ingresoController->logout(); 
+            $loginController->logout(); 
             break; 
         case 'verificacion': 
-            $ingresoController->verificacionIngreso(); 
+            $loginController->verificacionIngreso(); 
             break;
         case 'verReacondicionados': 
             $reacondicionadosController->getReacondicionadosPaginados(); 
@@ -90,13 +94,13 @@
             $reacondicionadosController->createReacondicionado();
             break;
         case 'updateUsuario':
-            $ingresoController->updateUsuario($params[1]);
+            $usserController->updateUsuario($params[1]);
             break;
         case 'deleteUsuario':
-            $ingresoController->deleteUsuario($params[1]);
+            $usserController->deleteUsuario($params[1]);
             break;    
         case 'editarRol':
-            $ingresoController->vereditarRol($params[1]);
+            $usserController->vereditarRol($params[1]);
             break;
         default: 
             echo('404 Pagina no encontrada'); 
