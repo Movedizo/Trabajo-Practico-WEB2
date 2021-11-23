@@ -30,14 +30,18 @@ class ReacondicionadosController{
         $this->view->verUsuario();
     }
 
-    /*function verReacondicionadosFull($id= NULL){
+    function verReacondicionadosFull($id= NULL){
         $logueado = $this->accesoHelper->checkLoggedIn();
         if(isset($_GET['modelo'])){
-            var_dump($_GET['modelo']);
-            $marcas = $this->marcasModel->getMarcas($id);
-            $modeloPorMarca = $this->model->getModelosPorMarca($id);
-            $this->view->verModeloPorMarca($marcas, $modeloPorMarca, $logueado);
+           $pormarca = ($_GET['modelo']);
+            $modeloPorMarca = $this->model->getModelosPorMarca($pormarca);
+            $this->view->verModeloPorMarca($pormarca, $modeloPorMarca, $logueado);
         }
+        
+        
+        
+        /* Comentamos estas funciones para preguntar por prety URL
+
         if(isset($_GET['almacenamientoporgb'])){
             $porAlmacenamiento = $_GET['almacenamiento'];
             $porAlmacenamiento= $this->model->getModelosPorAlmacenamiento($porAlmacenamiento);
@@ -48,17 +52,17 @@ class ReacondicionadosController{
             $porRam = $this->model->getRam();
             $this->view->verRam($porRam);
             };
-        }
-    */
-    function verModeloPorMarca($id){
+    */  }
+    
+   /* function verModeloPorMarca($id){
         $logueado = $this->accesoHelper->checkLoggedIn();
         $marcas = $this->marcasModel->getMarcas($id);
         $modeloPorMarca = $this->model->getModelosPorMarca($id);
         $this->view->verModeloPorMarca($marcas, $modeloPorMarca, $logueado);
-    }  
+    }  */
 
  function verAlmacenamiento($almacenamiento){
-        $almacenamiento= $this->model->getAlmacenamiento($almacenamiento);
+        $almacenamiento= $this->model->getAlmacenamiento();
         $this->view->verAlmacenamiento($almacenamiento);
     }
 
@@ -163,9 +167,20 @@ class ReacondicionadosController{
         } 
     }
 
-
-
- 
+    function filtrado(){
+        if(isset($_POST['modelo'])){
+        $modelo = $_POST['modelo'];
+        }else {
+            $this->view->showError("Debe Ingresar el nombre del equipo a buscar");
+        }
+        $modelos = $this->model->getByModel($modelo);
+        if( $modelos){
+        $this->view->verFiltro($modelos);
+    }
+    else { $this->view->showError("Debe Ingresar el nombre del equipo a buscar");
+        }
+   
+}
     public function getReacondicionadosPaginados(){
        $logueado = $this->accesoHelper->checkLoggedIn();
         $limit = itemPorPagina;

@@ -89,4 +89,11 @@ $sentencia->execute();
 $reacondicionados = $sentencia->fetchAll(PDO::FETCH_OBJ);
 return $reacondicionados;
     }
+
+    function getByModel($modelo){
+        $sentencia = $this->db->prepare("SELECT * FROM reacondicionados as r INNER JOIN marcas as m ON r.id_marca=m.id_marca WHERE modelo like ?");
+        $sentencia->execute(array("%$modelo%"));
+        $reacondicionados = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return  $reacondicionados;
+    }
 }

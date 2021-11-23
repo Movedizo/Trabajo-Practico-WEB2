@@ -93,6 +93,11 @@ class ReacondicionadoView {
 
     }
 
+    function verFiltro($modelo){
+        $this->smarty->assign('modelo', $modelo);
+        $this->smarty->display('templates/filtro.tpl');   
+    }
+
     function verPaginado($totalPaginas, $reacondicionados, $logueado, $pagina){
         $this->smarty->assign('totalPaginas', $totalPaginas);
         $this->smarty->assign('reacondicionados', $reacondicionados);

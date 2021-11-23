@@ -1,5 +1,5 @@
-
 "user strict"    
+
 
 let id_reacondicionado = document.querySelector("#form-crear-comentario").dataset.id_reacondicionado;
 let id_usuario = document.querySelector("#form-crear-comentario").dataset.id_usuario;

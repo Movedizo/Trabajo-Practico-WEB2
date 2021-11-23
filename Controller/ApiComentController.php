@@ -36,12 +36,13 @@ class ApiComentController
     }
 
 
-    function createComent($params = null){
+    function createComent($params = null)
+    {
         $logueado = $this->accesoHelper->checkLoggedIn();
         if ($logueado['rol'] >= 1) {
             $body = $this->getBody();
             var_dump($body);
-        $this->model->createComent($body->id_reacondicionado, $body->id_usuario, $body->comentario, $body->puntaje, $body->fecha);
+            $this->model->createComent($body->id_reacondicionado, $body->id_usuario, $body->comentario, $body->puntaje, $body->fecha);
         }
     }
     private function getBody()

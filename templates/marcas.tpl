@@ -5,7 +5,7 @@
 <div class="container">
     <ul class="li">
         {foreach from=$marcas item=$item}
-            <li><a href="modelo/{$item->id_marca}">{$item->marca}</a></li>
+            <li><a href="verfull/?marca={$item->id_marca}">{$item->marca}</a></li>
             {if isset($marca->imagen)}
                 <img src="{$marca->imagen}"/>
             {/if}
@@ -15,6 +15,6 @@
     </ul>
 </div>
 
-<a href="listaAdmin"> Volver</a>
+<a href="homestart"> Volver</a>
 
 {include file='templates/footer.tpl'}

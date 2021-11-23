@@ -26,13 +26,13 @@
     switch ($params[0]){
 
         case 'home': 
-            $ingresoController->showIngreso();
+            $loginController->showIngreso();
             break;
         case 'homestart': 
-            $ingresoController->showStart();
+            $loginController->showStart();
             break;
         case 'visitante':
-            $ingresoController->showStart();
+            $loginController->showStart();
             break;
         case 'usuarios': 
             $usserController->verUsuarios(); 
@@ -58,9 +58,11 @@
         case 'marca': 
             $marcasController->verMarcas();
             break;
+        /*
+        Este caso es reemplazado por el verfull que utiliza las variables $_GET
         case 'modelo': 
             $reacondicionadosController->verModeloPorMarca($params[1]);
-            break;
+            break;*/
         case 'caracteristicas':
             $reacondicionadosController->verCaracteristicas($params[1]);
             break;
@@ -76,8 +78,8 @@
         case 'ram': 
             $reacondicionadosController->verRam();
             break;
-        case 'pagina':
-            $reacondicionadosController->getReacondicionadosPaginados();    
+        case 'filtrado':
+            $reacondicionadosController->filtrado();    
         case 'agregar':
             $reacondicionadosController->verAgregar();
             break;     
@@ -101,6 +103,9 @@
             break;    
         case 'editarRol':
             $usserController->vereditarRol($params[1]);
+            break;
+        case 'verfull':
+            $reacondicionadosController->verReacondicionadosFull($params[1]);
             break;
         default: 
             echo('404 Pagina no encontrada'); 

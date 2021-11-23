@@ -21,6 +21,6 @@
     </div>
 </div>
 
-<a href="listaAdmin"> Volver</a>
+<a href="homestart"> Volver</a>
 
 {include file='templates/footer.tpl'}

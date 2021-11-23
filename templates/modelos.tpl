@@ -12,14 +12,13 @@
     {foreach from=$reacondicionados item=$reacondicionado}
         <tr>
             <td><a href="caracteristicas/{$reacondicionado->id_reacondicionado}">{$reacondicionado->modelo}</a></td>
-            <td id="coment">Aqui van los comentarios</td>
             </tr>
         {/foreach}}
 
         </table> 
 </div>
 
-<a href="listaAdmin"> Volver</a>
+<a href="homestart"> Volver</a>
 
 
 {include file='templates/footer.tpl'}
