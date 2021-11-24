@@ -18,7 +18,7 @@ class MarcasView{
 
     function verEditar($marca, $logueado){
         $this->smarty->assign('rol', $logueado['rol']);
-        $this->smarty->assign('marcas', $marca);
+        $this->smarty->assign('marca', $marca);
 
         $this->smarty->display('templates/editarMarca.tpl');
     }
@@ -27,6 +27,10 @@ class MarcasView{
 
         $this->smarty->assign('aviso', $aviso);
         $this->smarty->display('templates/marcas.tpl');
+    }
+
+    function showHomeLocation($url){
+        header("Location: ".BASE_URL."$url");
     }
 }
 

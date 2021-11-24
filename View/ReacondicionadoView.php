@@ -10,6 +10,7 @@ class ReacondicionadoView {
         $this->smarty = new Smarty();
     }
 
+
     function verAcceso(){
         $this->smarty->assign('titulo', 'Telefonos Reacondicionados Tandil');
         $this->smarty->display('templates/acceso.tpl');
@@ -60,13 +61,7 @@ class ReacondicionadoView {
         $this->smarty->assign('cantReacondicionados', $cantReacondicionados);
         $this->smarty->display('templates/reacondicionadosTable.tpl');   
     }
-    
-
-    function verReacondicionados($reacondicionado){
-        $this->smarty->assign('reacondicionados', $reacondicionado);
-        $this->smarty->display('templates/reacondicionadosTable.tpl');
-    }
- 
+     
     function verEdicion($reacondicionado){
         $this->smarty->assign('reacondicionados', $reacondicionado);
         $this->smarty->display('templates/editar.tpl');

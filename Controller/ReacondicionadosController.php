@@ -79,7 +79,7 @@ class ReacondicionadosController
         $porAlmacenamiento = $this->model->getModelosPorAlmacenamiento($porAlmacenamiento);
         $cantReacondicionados = count($porAlmacenamiento);
 
-        $this->view->verPorAlmacenamiento($porAlmacenamiento, $logueado, $cantReacondicionados);
+        $this->view->verPorAlmacenamiento($porAlmacenamiento, $logueado, $cantReacondicionados,);
     }
 
     function verRam()
@@ -163,14 +163,24 @@ class ReacondicionadosController
     function updateReacondicionado(){
             $logueado = $this->accesoHelper->checkLoggedIn();
             if ($logueado['rol'] == 2){
+                if (isset(
+                    $_POST['marca'],
+                    $_POST['modelo'],
+                    $_POST['precio'],
+                    $_POST['almacenamiento'],
+                    $_POST['pantalla'],
+                    $_POST['ram'],
+                    $_POST['bateria'],
+                    $_POST['stock']
+                )) {
                 $this->model->updateReacondicionadoFromDB($_POST['id_reacondicionado'], $_POST['marca'],$_POST['modelo'],$_POST['precio'],$_POST['codigo'], $_POST['almacenamiento'], $_POST['pantalla'], $_POST['ram'], $_POST['bateria'], $_POST['stock']);
                 $this->view->showHomeLocation("verReacondicionados");
             } 
-            else { $this->view->showHomeLocation("homestart");
-            } 
-       }
-
-
+        }
+        else { $this->view->showHomeLocation("homestart");
+        } 
+    }   
+    
     function deleteReacondicionado($id)
     {
         $logueado = $this->accesoHelper->checkLoggedIn();

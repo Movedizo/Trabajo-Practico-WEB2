@@ -15,34 +15,31 @@ class MarcasModel{
         return $marcas;
     }
 
-    function deleteMarca($id){
+    function deleteMarcaFromDB($id){
 
         $sentencia = $this->db->prepare("DELETE FROM marcas WHERE id_marca = ?");
         $sentencia->execute(array($id));
     }
 
+    function createMarca($marca, $sistemaoperativo, $path){ 
+
+        $sentencia = $this->db->prepare('INSERT INTO marcas(marca, sistemaoperativo, img) VALUES( ?, ?, ?)');
+        $sentencia->execute(array($marca, $sistemaoperativo, $path));
+        return $this->db->lastInsertId();
+    }
+
     function uploadImage($image){
-        $target = 'uploads/' . uniqid() . "." . strtolower(pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION));
+        $target = 'img/product/' . uniqid() . '.jpg';
         move_uploaded_file($image, $target);
         return $target;
     }
 
-    function agregarMarca($marca, $sistemaoperativo, $img = null){ 
+    function updateMarca( $id_marca, $marca, $sistemaoperativo){
 
-        $pathImg = null;
-        if ($img)
-            $pathImg = $this->uploadImage($img);
-        $sentencia = $this->db->prepare('INSERT INTO marcas(marca, sistemaoperativo, img) VALUES( ?, ?, ?)');
-        $sentencia->execute(array($marca, $sistemaoperativo, $pathImg));
-    }
-
-    function updateMarca($marca, $sistemaoperativo, $img = null, $id_marca){
-
-        $pathImg = null;
-        if ($img)
-            $pathImg = $this->uploadImage($img);
-        $sentencia = $this->db->prepare("UPDATE marcas SET marca = ?, sistemaoperativo = ?, img=? WHERE id_marca = ?");
-        $sentencia->execute(array($marca, $sistemaoperativo, $pathImg, $id_marca));
+        $sentencia = $this->db->prepare("UPDATE marcas SET marca = ?, sistemaoperativo = ? WHERE id_marca = ?");
+        $sentencia->execute(array($marca, $sistemaoperativo, $id_marca));
+        return $this->db->lastInsertId();
+        
     }
 
     function getMarca($id){

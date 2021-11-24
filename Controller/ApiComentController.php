@@ -1,7 +1,6 @@
 <?php
 
 require_once "./Model/ComentsModel.php";
-require_once "./Model/ReacondicionadoModel.php";
 require_once "./View/ApiView.php";
 require_once "./Helpers/AccesoHelper.php";
 
@@ -44,38 +43,36 @@ class ApiComentController{
                 return $this->view->response("Sin Comentarios", 400);
             }
         }
-        
-        function insertComment($params = []) 
-        {
-            $this->authHelper->checkloggedIn();
-            $body = $this->getBody();   
-            $id = $this->model->insertComment($body->content, $body->score, $body->id_author, $body->id_product);
-            if ($id != 0) {
-                $this->view->response("El comentario se insertó con el id=$id", 200);
-            } else {
-                $this->view->response("El comentario no se pudo insertar", 500);
-            }
-    
-        }
+     
 
-    function createComent($params = null){
-        $logueado = $this->accesoHelper->checkLoggedIn();
+    function createComent(){
         $body = $this->getBody();
-        
-        $id = $this->model->createComent($body->id_reacondicionado, $body->id_usuario, $body->comentario, $body->puntaje);
+        $id = $this->model->insertarComent( $body->id_usuario, $body->id_reacondicionado, $body->comentario, $body->puntaje);
         if ($id != 0) {
-            $this->view->response("El comentario se insertó con el id=".$id, 200);
+            $this->view->response("El comentario se inserto con el id=".$id, 200);
         } else {
             $this->view->response("El comentario no se pudo insertar", 500);
         } 
         
     }
 
-    private function getBody() {
+    function getBody() {
         $bodyString = file_get_contents("php://input");
         return json_decode($bodyString);
     }
     
+    function deleteComent($params = []){
+        $logueado = $this->accesoHelper->checkLoggedIn();
+        if($logueado['rol'] == 2)
+        $idComent = $params[':ID'];
+        $coment = $this->model->getComent($idComent);
+        if($coment){
+            $this->model->deleteComent($idComent);
+            return $this->view->response("Se elimino el comentario con el id=".$idComent, 200);
+        }else{
+            return $this->view->response("El comentario ya no existe", 400);
+        }
+    }
 }
 
 ?>

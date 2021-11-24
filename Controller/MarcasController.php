@@ -27,53 +27,53 @@ class MarcasController{
     function verEditar($marca){
         $logueado = $this->accesoHelper->checkLoggedIn();
         $this->view->verEditar($marca, $logueado);
-
     }
 
-    function deleteMarca($id){
-        $this->accesoHelper->checkLoggedIn();
-        try {
-            $this->model->deleteMarca($id);
-            header("Location: " . BASE_URL . "marcas");
-        } catch (\Throwable $th) {
-            $this->view->verError("La Marca no fue eliminada correctamente.");
+    function deleteMarcaFromDB($id){
+        $logueado = $this->accesoHelper->checkLoggedIn();
+        if ($logueado['rol'] == 2) {
+            $this->model->deleteMarcaFromDB($id);
+            $this->view->showHomeLocation("verMarcas");
+        } else {
+            $this->view->showHomeLocation("homestart");
         }
     }
 
     function updateMarca(){
         $logueado = $this->accesoHelper->checkLoggedIn();
-        if (isset($_POST['marca']) && isset($_POST['sistemaoperativo']) && ($_POST['marca'] != '')
-            && ($_POST['sistemaoperativo'] != '') && ($_FILES['imagen']!= '')){
+        if ($logueado['rol'] == 2){
+            if((isset($_POST['marca']) && ($_POST['sistemaoperativo']))){
+        $this->model->updateMarca($_POST['id_marca'], $_POST['marca'],$_POST['sistemaoperativo']);
+        var_dump($id_marca);
+           //$this->view->showHomeLocation("marca");
+        } 
+        else { $this->view->showHomeLocation("homestart");
+        } 
+   }
 
-            $marca = $_POST["marca"];
-            $sistemaoperativo = $_POST["sistemaoperativo"];
-            $id_marca = $_POST["id_marca"];
-            if($_FILES['imagen']['type'] == "image/jpg" || $_FILES['imagen']['type'] == "image/jpeg" || $_FILES['imagen']['type'] == "image/png") {
-                $this->model->updateMarca($id_marca ,$marca, $sistemaoperativo, $_FILES['imagen']['tmp_name']);
+    function createMarca()
+    {
+        $logueado = $this->accesoHelper->checkLoggedIn();
+        if (isset(
+            $_POST['marca'],
+            $_POST['sistemaoperativo'],
+        )) {
+            $marca = $_POST['marca'];
+            $sistemaoperativo = $_POST['sistemaoperativo'];
+            $pathImg = $this->insertImg();
+
+            if ($logueado['rol'] >= 1) {
+                $this->model->createMarca(
+                    $marca,
+                    $sistemaoperativo,
+                    $pathImg
+                );
+                $this->view->showHomeLocation("verMarcas");
+            } else {
+                $this->view->verError("Faltan datos");
             }
-            else
-                $this->model->updateMarca($marca, $sistemaoperativo, null, $id_marca);
-            header("Location: " . BASE_URL . "editarMarca/"+$id_marca);
         }
-        $this->view->verError("La marca ya existe");
-    }
-
-    function agregarMarca(){
-
-        $this->authHelper->checkLoggedIn();
-        if (isset($_POST['marca']) && isset($_POST['sistemaoperativo'])) {
-
-            $marca = $_POST["marca"];
-            $sistemaoperativo = $_POST["sistemaoperativo"];
-            if($_FILES['img']['type'] == "image/jpg" || $_FILES['img']['type'] == "image/jpeg" || $_FILES['img']['type'] == "image/png") {
-                $this->model->agregarMarca($marca, $sistemaoperativo, $_FILES['img']['tmp_name']);
-            }
-            else
-                $this->model->agregarMarca($marca, $sistemaoperativo, null);
-            header("Location: " . BASE_URL . "agregar");
-        }
-        $this->view->verError("La marca ya existe");
-    }
+    }   
 }
 
 ?>

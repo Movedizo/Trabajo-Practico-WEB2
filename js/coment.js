@@ -58,4 +58,16 @@ async function createComent() {
 }
 }
 
+async function deleteComent(idComment) {
+    try {
+        let res = await fetch(urlApi + "/" + id_comentario,{
+            "method": "DELETE"
+        });
+        if (res.status == 200) {
+            getComments();
+        }
 
+    } catch (error) {
+        console.log("error");
+    }
+}
