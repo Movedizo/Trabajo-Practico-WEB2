@@ -74,7 +74,6 @@ class ReacondicionadoView {
     function verCaracteristicas($reacondicionado, $logueado, $cantReacondicionados){
         $this->smarty->assign('rol', $logueado['rol']);
         $this->smarty->assign('usuario', $logueado['id_usuario']);
-
         $this->smarty->assign('cantReacondicionados', $cantReacondicionados);
         $this->smarty->assign('titulo', "Detalles del Reacondicionado");
         $this->smarty->assign('reacondicionados', $reacondicionado);

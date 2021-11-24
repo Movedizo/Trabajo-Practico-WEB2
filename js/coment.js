@@ -9,16 +9,23 @@ const urlApi = "api/comentarios";
 
 
 let app = new Vue({
-    el: "#comentspace",
-    data: {
-        subtitulo: "Aqui Van Los Comentarios del celular " +id_reacondicionado,
-        comentarios:[],
-    },//En este arreglo se guarda el objeto que me trae el fetch
-});
+    el:"#comentspace",
+   
+    data:{
+        comentarios: [],
+        subtitulo:"Comentarios"
+    },
+    methods:{
+            deleteComentario: function(nro_btn){
+            deleteComent(nro_btn);
+            }
+        }
+    }
+);
 
 async function getComents() {
     try {
-        let response = await fetch(urlApi + "/reacondicionado/" + id_reacondicionado);
+        let response = await fetch(urlApi+"/reacondicionado/"+ id_reacondicionado);
         let comentarios = await response.json();
         app.comentarios = comentarios;
     }
@@ -58,15 +65,15 @@ async function createComent() {
 }
 }
 
-async function deleteComent(idComment) {
+async function deleteComent(nro_btn) {
     try {
-        let res = await fetch(urlApi + "/" + id_comentario,{
+        let res = await fetch(urlApi + "/" + nro_btn,{
             "method": "DELETE"
         });
         if (res.status == 200) {
-            getComments();
+            getComents();
         }
-
+        
     } catch (error) {
         console.log("error");
     }

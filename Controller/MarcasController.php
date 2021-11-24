@@ -43,13 +43,13 @@ class MarcasController{
         $logueado = $this->accesoHelper->checkLoggedIn();
         if ($logueado['rol'] == 2){
             if((isset($_POST['marca']) && ($_POST['sistemaoperativo']))){
-        $this->model->updateMarca($_POST['id_marca'], $_POST['marca'],$_POST['sistemaoperativo']);
-        var_dump($id_marca);
-           //$this->view->showHomeLocation("marca");
+                 $this->model->updateMarca($_POST['id_marca'], $_POST['marca'],$_POST['sistemaoperativo']);
+                 $this->view->showHomeLocation("marca");
+            } 
+            else { $this->view->showHomeLocation("homestart");
         } 
-        else { $this->view->showHomeLocation("homestart");
-        } 
-   }
+       }
+    }
 
     function createMarca()
     {
@@ -75,5 +75,3 @@ class MarcasController{
         }
     }   
 }
-
-?>

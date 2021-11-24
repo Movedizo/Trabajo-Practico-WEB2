@@ -25,6 +25,10 @@ class IngresoView{
         $this->smarty->display('templates/usuario.tpl');
     }
 
+    function showError($error){
+        echo($error);
+    }
+
     function showHome($url){
         header("Location: ".BASE_URL."$url");
     }
