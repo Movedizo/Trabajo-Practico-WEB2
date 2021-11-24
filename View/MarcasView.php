@@ -6,30 +6,39 @@ class MarcasView{
 
     private $smarty;
 
-    function __construct() {
+    function __construct() 
+    {
         $this->smarty = new Smarty();
     }
 
-    function verMarcas($marcas, $logueado){
+    function verMarcas($marcas, $logueado)
+    {
         $this->smarty->assign('rol', $logueado['rol']);
         $this->smarty->assign('marcas', $marcas);
         $this->smarty->display('templates/marcas.tpl');
     }
 
-    function verEditar($marca, $logueado){
+    function verEditarMarca($marca, $logueado)
+    {
         $this->smarty->assign('rol', $logueado['rol']);
         $this->smarty->assign('marca', $marca);
-
         $this->smarty->display('templates/editarMarca.tpl');
     }
 
-    function verError($aviso){
-
+    function verError($aviso)
+    {
         $this->smarty->assign('aviso', $aviso);
         $this->smarty->display('templates/marcas.tpl');
     }
 
-    function showHomeLocation($url){
+    function alertaDeleteReacondicionados($aviso)
+    {
+        $this->smarty->assign('aviso', $aviso);
+        $this->smarty->display('templates/marcas.tpl');
+    }
+
+    function showHomeLocation($url)
+    {
         header("Location: ".BASE_URL."$url");
     }
 }

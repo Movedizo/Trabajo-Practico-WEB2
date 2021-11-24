@@ -4,7 +4,8 @@ class MarcasModel{
 
     private $db;
 
-    function __construct(){
+    function __construct()
+    {
         $this->db = new PDO('mysql:host=localhost;' . 'dbname=csv_db 6;charset=utf8', 'root', '');
     }
 
@@ -21,10 +22,10 @@ class MarcasModel{
         $sentencia->execute(array($id));
     }
 
-    function createMarca($marca, $sistemaoperativo, $path){ 
+    function createMarca($marca, $sistemaoperativo){ 
 
-        $sentencia = $this->db->prepare('INSERT INTO marcas(marca, sistemaoperativo, img) VALUES( ?, ?, ?)');
-        $sentencia->execute(array($marca, $sistemaoperativo, $path));
+        $sentencia = $this->db->prepare('INSERT INTO marcas(marca, sistemaoperativo) VALUES( ?, ?)');
+        $sentencia->execute(array($marca, $sistemaoperativo));
         return $this->db->lastInsertId();
     }
 

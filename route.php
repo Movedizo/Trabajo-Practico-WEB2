@@ -5,7 +5,6 @@
     require_once 'Controller/MarcasController.php';
     require_once 'Controller/UsserController.php';
 
-
     define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');   
 
     if (!empty($_GET['action'])){
@@ -22,7 +21,6 @@
     $loginController = new LoginController();
     $usserController = new UsserController();
 
-
     switch ($params[0]){
 
         case 'home': 
@@ -34,11 +32,14 @@
         case 'visitante':
             $loginController->showStart();
             break;
+        case 'logout': 
+            $loginController->logout(); 
+            break;
+        case 'verificacion': 
+            $loginController->verificacionIngreso(); 
+            break;
         case 'usuarios': 
             $usserController->verUsuarios(); 
-            break;
-        case 'usuario': 
-            $reacondicionadosController->verUsuario(); 
             break;
         case 'registro':
             $usserController->vercreateUsser();
@@ -46,18 +47,21 @@
         case 'createUsser':
             $usserController->createUsser();
             break;
-        case 'logout': 
-            $loginController->logout(); 
-            break; 
-        case 'verificacion': 
-            $loginController->verificacionIngreso(); 
+        case 'deleteUsuario':
+            $usserController->deleteUsuario($params[1]);
+            break;    
+        case 'editarRol':
+            $usserController->vereditarRol($params[1]);
+            break;
+        case 'updateUsuario':
+            $usserController->updateUsuario($params[1]);
+            break;
+        case 'usuario': 
+            $reacondicionadosController->verUsuario(); 
             break;
         case 'verReacondicionados': 
             $reacondicionadosController->getReacondicionadosPaginados(); 
             break; 
-        case 'marca': 
-            $marcasController->verMarcas();
-            break;
         /*
         Este caso es reemplazado por el verfull que utiliza las variables $_GET
         case 'modelo': 
@@ -96,23 +100,23 @@
         case 'createReacondicionado':
             $reacondicionadosController->createReacondicionado();
             break;
-        case 'updateUsuario':
-            $usserController->updateUsuario($params[1]);
-            break;
-        case 'deleteUsuario':
-            $usserController->deleteUsuario($params[1]);
-            break;    
-        case 'editarRol':
-            $usserController->vereditarRol($params[1]);
-            break;
         case 'verfull':
             $reacondicionadosController->verReacondicionadosFull($params[1]);
             break;
+        case 'marca': 
+            $marcasController->verMarcas();
+            break;
+        case 'eliminarMarca': 
+            $marcasController->deleteMarca($params[1]);
+            break;
         case 'editarMarca':
-            $marcasController->verEditar($params[1]);
+            $marcasController->verEditarMarca($params[1]);
             break;
         case 'updateMarca':
             $marcasController->updateMarca($params[1]);
+            break;
+        case 'verfull':
+            $marcasController->verMarcasFull($params[1]);
             break;
         default: 
             echo('404 Pagina no encontrada'); 
