@@ -75,18 +75,18 @@ class MarcasController{
         } 
     }
 
-    //function createMarca(){
-        //$logueado = $this->accesoHelper->checkLoggedIn();
-        //if (($logueado['rol'] >= 1)
-           // && !empty( $_POST['marca']) && 
-            //!empty ($_POST['sistemaoperativo'])){
-            //$this->model->createMarca($_POST['marca'],$_POST['sistemaoperativo']);
-            //$this->view->showHomeLocation("verMarcas");        
-       // }
-        //else {
-        //    $this->view->verError("Faltan datos");
-        //}  
-    //}   
+    function createMarca(){
+        $logueado = $this->accesoHelper->checkLoggedIn();
+        if (($logueado['rol'] >= 1)
+           && !empty( $_POST['marca']) && 
+            !empty ($_POST['sistemaoperativo'])){
+            $this->model->createMarca($_POST['marca'],$_POST['sistemaoperativo']);
+            $this->view->showHomeLocation("verMarcas");        
+        }
+        else {
+          $this->view->verError("Faltan datos");
+        }  
+    }   
 }
 
 ?>
