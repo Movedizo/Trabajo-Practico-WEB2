@@ -62,8 +62,8 @@ class ReacondicionadoModel{
 
     function updateReacondicionadoFromDB($id, $id_marca,  $modelo, $precio, $codigo, $almacenamiento, $pantalla, $ram, $bateria, $stock){
 
-        $sentencia = $this->db->prepare("UPDATE reacondicionados SET id_marca='$id_marca', modelo='$modelo', precio='$precio', codigo='$codigo', almacenamiento='$almacenamiento', pantalla='$pantalla', ram='$ram', bateria='$bateria', stock='$stock' WHERE id_reacondicionado =?");
-        $sentencia->execute(array($id));
+        $sentencia = $this->db->prepare("UPDATE reacondicionados SET id_marca= ? , modelo= ? , precio= ? , codigo= ?, almacenamiento= ? , pantalla= ? , ram= ?, bateria= ? , stock= ? WHERE id_reacondicionado =?");
+        $sentencia->execute(array($id_marca,  $modelo, $precio, $codigo, $almacenamiento, $pantalla, $ram, $bateria, $stock, $id));
     }
 
     function getReacondicionado($id){

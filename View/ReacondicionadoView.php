@@ -91,7 +91,9 @@ class ReacondicionadoView {
 
     }
 
-    function verFiltro($modelo){
+    function verFiltro($modelo, $logueado){
+        $this->smarty->assign('rol', $logueado['rol']);
+
         $this->smarty->assign('modelo', $modelo);
         $this->smarty->display('templates/filtro.tpl');   
     }

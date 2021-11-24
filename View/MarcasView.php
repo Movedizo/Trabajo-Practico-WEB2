@@ -10,10 +10,17 @@ class MarcasView{
         $this->smarty = new Smarty();
     }
 
-    function verMarcas($marcas){
-
+    function verMarcas($marcas, $logueado){
+        $this->smarty->assign('rol', $logueado['rol']);
         $this->smarty->assign('marcas', $marcas);
         $this->smarty->display('templates/marcas.tpl');
+    }
+
+    function verEditar($marca, $logueado){
+        $this->smarty->assign('rol', $logueado['rol']);
+        $this->smarty->assign('marcas', $marca);
+
+        $this->smarty->display('templates/editarMarca.tpl');
     }
 
     function verError($aviso){

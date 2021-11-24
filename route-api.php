@@ -7,12 +7,9 @@ require_once 'Controller/ApiComentController.php';
 
 $router = new Router();
 
-$router->addRoute('marca', 'GET', 'ApiCelularesController', 'verMarcas'); //anda
-$router->addRoute('reacondicionados', 'GET', 'ApiCelularesController', 'verReacondicionados'); //anda 
-
-$router->addRoute('comentarios' , 'GET', 'ApiComentController' ,'getComents');  //anda 
+$router->addRoute('comentarios/reacondicionado/:ID' , 'GET', 'ApiComentController' ,'getComentByReacondicionados');  //anda 
 $router->addRoute('comentarios/:ID', 'GET', 'ApiComentController' ,'getComents');// anda
-$router->addRoute('comentarios/:ID ', 'POST', 'ApiComentController', 'createComent');
+$router->addRoute('comentarios', 'POST', 'ApiComentController', 'createComent');
 
 
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);

@@ -79,7 +79,8 @@
             $reacondicionadosController->verRam();
             break;
         case 'filtrado':
-            $reacondicionadosController->filtrado();    
+            $reacondicionadosController->filtrado();   
+            break; 
         case 'agregar':
             $reacondicionadosController->verAgregar();
             break;     
@@ -106,6 +107,12 @@
             break;
         case 'verfull':
             $reacondicionadosController->verReacondicionadosFull($params[1]);
+            break;
+        case 'editarMarca':
+            $marcasController->verEditar($params[1]);
+            break;
+        case 'updateMarca':
+            $marcasController->updateMarca($params[1]);
             break;
         default: 
             echo('404 Pagina no encontrada'); 

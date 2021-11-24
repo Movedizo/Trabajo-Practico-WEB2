@@ -97,8 +97,8 @@ class ReacondicionadosController
         $this->view->verPorRam($porRam, $logueado, $cantReacondicionados);
     }
 
-    function verEditar($reacondicionado)
-    {
+
+    function verEditar($reacondicionado){
         $logueado = $this->accesoHelper->checkLoggedIn();
         $this->view->verEdicion($reacondicionado, $logueado);
     }
@@ -160,43 +160,21 @@ class ReacondicionadosController
         }
     }
 
-    function updateReacondicionado($id)
-    {
-        $logueado = $this->accesoHelper->checkLoggedIn();
-        if ($logueado['rol'] == 1) {
-            if (isset(
-                $_POST['marca'],
-                $_POST['modelo'],
-                $_POST['precio'],
-                $_POST['almacenamiento'],
-                $_POST['pantalla'],
-                $_POST['ram'],
-                $_POST['bateria'],
-                $_POST['stock']
-            )) {
+    function updateReacondicionado(){
+            $logueado = $this->accesoHelper->checkLoggedIn();
+            if ($logueado['rol'] == 2){
+                $this->model->updateReacondicionadoFromDB($_POST['id_reacondicionado'], $_POST['marca'],$_POST['modelo'],$_POST['precio'],$_POST['codigo'], $_POST['almacenamiento'], $_POST['pantalla'], $_POST['ram'], $_POST['bateria'], $_POST['stock']);
+                $this->view->showHomeLocation("verReacondicionados");
+            } 
+            else { $this->view->showHomeLocation("homestart");
+            } 
+       }
 
-                $marca = $_POST['marca'];
-                $modelo = $_POST['modelo'];
-                $precio = $_POST['precio'];
-                $codigo = $_POST['codigo'];
-                $almacenamiento = $_POST['almacenamiento'];
-                $pantalla = $_POST['pantalla'];
-                $ram = $_POST['ram'];
-                $bateria = $_POST['bateria'];
-                $stock = $_POST['stock'];
-            }
-
-            $this->model->updateReacondicionadoFromDB($id, $marca, $modelo, $precio, $codigo, $almacenamiento, $pantalla, $ram, $bateria, $stock);
-            $this->view->showHomeLocation("verReacondicionados");
-        } else {
-            $this->view->showHomeLocation("homestart");
-        }
-    }
 
     function deleteReacondicionado($id)
     {
         $logueado = $this->accesoHelper->checkLoggedIn();
-        if ($logueado['rol'] == 1) {
+        if ($logueado['rol'] == 2) {
             $this->model->deleteReacondicionadoFromDB($id);
             $this->view->showHomeLocation("verReacondicionados");
         } else {
@@ -204,8 +182,9 @@ class ReacondicionadosController
         }
     }
 
-    function filtrado()
-    {
+    function filtrado(){
+        $logueado = $this->accesoHelper->checkLoggedIn();
+
         if (isset($_POST['modelo'])) {
             $modelo = $_POST['modelo'];
         } else {
@@ -213,7 +192,7 @@ class ReacondicionadosController
         }
         $modelos = $this->model->getByModel($modelo);
         if ($modelos) {
-            $this->view->verFiltro($modelos);
+            $this->view->verFiltro($modelos, $logueado);
         } else {
             $this->view->showError("Debe Ingresar el nombre del equipo a buscar");
         }
