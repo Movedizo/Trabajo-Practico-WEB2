@@ -1,24 +1,28 @@
 <?php
 
 include_once 'Model/ReacondicionadoModel.php';
+
 const itemPorPagina = 10;
 
-class HelperPaginado {
-   
+class HelperPaginado 
+{
     private $model;
 
-    function __construct(){
+    function __construct()
+    {
         $this->model = new ReacondicionadoModel();
     }
 
-   function getPaginas(){
+   function getPaginas()
+   {
         $limite = itemPorPagina; 
         $totalReacondicionados = $this->model->getTotalReacondiconados();
         $totalReacondicionados = ceil($totalReacondicionados / $limite);
         return $totalReacondicionados;
     }       
 
-    function getOffset(){
+    function getOffset()
+    {
         $pagina = 1;
         if(isset($_GET['pagina'])){
             $pagina = $_GET['pagina'];

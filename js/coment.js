@@ -39,42 +39,53 @@ getComents();
 let btn = document.querySelector("#btn-coment").addEventListener("click", createComent);
 
 
-async function createComent() {
+async function createComent() 
+{
     let comentario = document.querySelector("#comentario").value;
     let puntaje = document.querySelector("#puntaje").value;
 
-    let nuevoComentario = {
+    let nuevoComentario = 
+    {
         id_reacondicionado: id_reacondicionado,
         id_usuario: id_usuario,
         comentario: comentario,
-        puntaje: puntaje
-        
+        puntaje: puntaje  
     }
-    try {
-        let res = await fetch(urlApi, {
+    try
+    {let res = await fetch(urlApi, 
+        {
             method: "POST",
             headers: {"Content-type": "application/json"
             },
             body: JSON.stringify(nuevoComentario)
         });  
-        if (res.status == 200) {
+        if (res.status == 200) 
+        {
             getComents();
         }
-} catch (error) {
-    console.log("error");
-}
+    } 
+    catch (error) 
+    {
+        console.log("error");
+    }
 }
 
-async function deleteComent(nro_btn) {
-    try {
-        let res = await fetch(urlApi + "/" + nro_btn,{
+async function deleteComent(nro_btn) 
+{
+    try 
+    {
+        let res = await fetch(urlApi + "/" + nro_btn,
+        {
             "method": "DELETE"
         });
-        if (res.status == 200) {
+        if (res.status == 200) 
+        {
             getComents();
         }
         
-    } catch (error) {
+    } 
+    catch (error) 
+    {
         console.log("error");
     }
 }

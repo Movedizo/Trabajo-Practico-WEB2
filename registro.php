@@ -1,7 +1,7 @@
 <?php 
 
-function renderForm(){
-
+function renderForm()
+{
     echo '<h2>Registro</h2>
     <form method="POST">
         <input type="text" name="usuario" placeholder="Ingrese su usuario..."/>
@@ -12,7 +12,8 @@ function renderForm(){
 
 renderForm();
 
-if(!empty($_POST['usuario'])&& !empty($_POST['password'])){
+if(!empty($_POST['usuario'])&& !empty($_POST['password']))
+{
     $userEmail=$_POST['usuario'];
     $userPassword=password_hash($_POST['password'], PASSWORD_BCRYPT);
 

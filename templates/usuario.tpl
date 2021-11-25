@@ -1,6 +1,7 @@
 {include file='templates/header.tpl'}
 
 <h1> Usuarios</h1>
+
 <nav>
     <ul> Listado de Categorias
         <li><a href="marca/">Marca</a></li>

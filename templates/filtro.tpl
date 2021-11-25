@@ -1,4 +1,5 @@
 {include file='templates/header.tpl'}
+
 <div>
     <table class="table">
         <tr>
@@ -29,16 +30,10 @@
                 {if $rol ==1 || $rol == 2}    
                     <td> <a href="editar/{$reacondicionado->id_reacondicionado}">Editar</a></button></td>
                     <td> <a href="eliminar/{$reacondicionado->id_reacondicionado}">Eliminar</a></button></td>                  
-                {/if}
-                
+                {/if}  
             </tr>
-
         {/foreach}
-
     </table>
-
-    </div>
-
-
+</div>
 
 {include file='templates/footer.tpl'}

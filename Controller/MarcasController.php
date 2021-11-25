@@ -6,8 +6,8 @@ require_once "./Model/ReacondicionadoModel.php";
 require_once "./Helpers/AccesoHelper.php";
 
 
-class MarcasController{
-
+class MarcasController
+{
     private $model;
     private $view;
     private $reacondicionadoModel;
@@ -15,7 +15,6 @@ class MarcasController{
     private $accesoHelper;
 
     function __construct()
-
     {
         $this->accesoHelper= new AccesoHelper();
         $this->model = new MarcasModel();
@@ -34,6 +33,11 @@ class MarcasController{
     {
         $logueado = $this->accesoHelper->checkLoggedIn();
         $this->view->verEditarMarca($marca, $logueado);
+    }
+
+    function verAgregarMarca()
+    {
+        $this->view->verAgregarMarca();
     }
 
     function deleteMarca($id)

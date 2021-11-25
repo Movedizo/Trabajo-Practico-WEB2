@@ -1,9 +1,9 @@
 <?php
 
-class AccesoHelper{
-
-    function checkLoggedIn(){
-
+class AccesoHelper
+{
+    function checkLoggedIn()
+    {
         session_start();
         if (isset($_SESSION["usuario"])) {
             $logueado = $_SESSION;

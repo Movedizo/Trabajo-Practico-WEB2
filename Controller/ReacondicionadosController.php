@@ -11,7 +11,6 @@ const itemsPorPagina = 10;
 
 class ReacondicionadosController
 {
-
     private $model;
     private $view;
     private $accesoHelper;
@@ -42,8 +41,6 @@ class ReacondicionadosController
             $modeloPorMarca = $this->model->getModelosPorMarca($pormarca);
             $this->view->verModeloPorMarca($modeloPorMarca, $logueado);
         }
-
-
 
         /* Comentamos estas funciones para preguntar por prety URL
 
@@ -96,7 +93,6 @@ class ReacondicionadosController
 
         $this->view->verPorRam($porRam, $logueado, $cantReacondicionados);
     }
-
 
     function verEditar($reacondicionado){
         $logueado = $this->accesoHelper->checkLoggedIn();
@@ -160,7 +156,8 @@ class ReacondicionadosController
         }
     }
 
-    function updateReacondicionado(){
+    function updateReacondicionado()
+    {
             $logueado = $this->accesoHelper->checkLoggedIn();
             if ($logueado['rol'] == 2){
                 if (isset(
@@ -192,7 +189,8 @@ class ReacondicionadosController
         }
     }
 
-    function filtrado(){
+    function filtrado()
+    {
         $logueado = $this->accesoHelper->checkLoggedIn();
 
         if (isset($_POST['modelo'])) {
@@ -207,7 +205,9 @@ class ReacondicionadosController
             $this->view->showError("Debe Ingresar el nombre del equipo a buscar");
         }
     }
-    function getReacondicionadosPaginados(){
+
+    function getReacondicionadosPaginados()
+    {
         $logueado = $this->accesoHelper->checkLoggedIn();
         $limit = itemPorPagina;
         $offset = $this->helperPaginado->getOffset();

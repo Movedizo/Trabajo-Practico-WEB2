@@ -6,8 +6,7 @@
         <input placeholder="usuario" type="text" name="usuario" id="usuario" required>
         <input placeholder="password" type="password" name="password" id="password" required>
         <input type="submit" class="btn btn-primary" value="Ingresar">
-    </form>
-    
+    </form> 
 </div>
 
 <div>

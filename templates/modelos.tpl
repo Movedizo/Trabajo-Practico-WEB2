@@ -3,7 +3,6 @@
 <div>
     <h1 class="h1">{$titulo}</h1>
     <table class="table">
-    
         <tr>
             <td>Modelo</td>
         </tr>
@@ -13,7 +12,6 @@
                 <td><a href="caracteristicas/{$reacondicionado->id_reacondicionado}">{$reacondicionado->modelo}</a></td>
                 </tr>
         {/foreach}}
-
     </table> 
 </div>
 

@@ -19,5 +19,7 @@
         </tr>  
         {/foreach}
 </table>
+
 <a class="btn" href="homestart">Home</a>
+
 {include file='templates/footer.tpl'}

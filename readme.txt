@@ -23,6 +23,7 @@ Se debe generar una paginación del lado del servidor para recorrer los listados
 Como usuario quiero poder realizar búsquedas avanzadas de los ítems.
 Se debe incluir un formulario de búsquedas avanzadas donde se filtren los ítems dependiendo de los atributos internos. Esta búsqueda se debe resolver del lado del servidor.
 Como usuario quiero poder ordenar los comentarios por antigüedad o puntaje, ascendente o descendente. (Via API REST)
-	Se debe ordenar del lado del servidor.
+
+Se debe ordenar del lado del servidor.
 Como usuario quiero poder filtrar los comentarios por cantidad de puntos.  (Via API REST)
-	Se debe filtrar del lado del servidor.
+Se debe filtrar del lado del servidor.

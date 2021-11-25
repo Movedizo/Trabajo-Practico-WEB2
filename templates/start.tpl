@@ -14,9 +14,6 @@
     </ul>
 </nav>
 
-
-
-
 <div>
     {if $rol>=1}
         <a href="logout">Logout</a>

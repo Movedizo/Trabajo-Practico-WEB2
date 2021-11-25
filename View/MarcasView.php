@@ -2,8 +2,8 @@
 
 require_once './libs/smarty-3.1.39/smarty-3.1.39/libs/Smarty.class.php';
 
-class MarcasView{
-
+class MarcasView
+{
     private $smarty;
 
     function __construct() 
@@ -25,7 +25,8 @@ class MarcasView{
         $this->smarty->display('templates/editarMarca.tpl');
     }
 
-    function verAgregarMarca(){
+    function verAgregarMarca()
+    {
         $this->smarty->display('templates/agregarMarca.tpl');
     }
 

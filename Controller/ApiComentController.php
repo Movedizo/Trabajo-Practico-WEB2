@@ -4,22 +4,21 @@ require_once "./Model/ComentsModel.php";
 require_once "./View/ApiView.php";
 require_once "./Helpers/AccesoHelper.php";
 
-
-class ApiComentController{
-
+class ApiComentController
+{
     private $model;
     private $view;
     private $accesoHelper;
 
-    function __construct(){
-
+    function __construct()
+    {
         $this->accesoHelper = new AccesoHelper();
         $this->model = new ComentsModel();
         $this->view = new ApiView();
     }
 
-    function getComents($params = null){
-
+    function getComents($params = null)
+    {
         $idComent = $params[':ID'];
         if (!isset($idComent)) {
             $coments = $this->model->GetComents();
@@ -34,7 +33,8 @@ class ApiComentController{
         }
     }
 
-    function getComentByReacondicionados($params = null){
+    function getComentByReacondicionados($params = null)
+    {
         $idReacondicionado = $params[':ID'];
             $comentarios = $this->model->getComentByReacondicionados($idReacondicionado);
             if($comentarios){
@@ -42,26 +42,27 @@ class ApiComentController{
             } else{
                 return $this->view->response("Sin Comentarios", 400);
             }
-        }
+    }
      
-
-    function createComent(){
+    function createComent()
+    {
         $body = $this->getBody();
         $id = $this->model->insertarComent( $body->id_usuario, $body->id_reacondicionado, $body->comentario, $body->puntaje);
         if ($id != 0) {
             $this->view->response("El comentario se inserto con el id=".$id, 200);
         } else {
             $this->view->response("El comentario no se pudo insertar", 500);
-        } 
-        
+        }  
     }
 
-    function getBody() {
+    function getBody() 
+    {
         $bodyString = file_get_contents("php://input");
         return json_decode($bodyString);
     }
     
-    function deleteComent($params = []){
+    function deleteComent($params = [])
+    {
         $logueado = $this->accesoHelper->checkLoggedIn();
         if($logueado['rol'] == 2)
         $idComent = $params[':ID'];

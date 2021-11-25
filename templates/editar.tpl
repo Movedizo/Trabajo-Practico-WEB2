@@ -3,6 +3,7 @@
 <div class= "lis-group">
     <div>
         <h2>Editar Celulares Reacondicionados</h2>
+        
         <form action="updateReacondicionado" method="POST">
             <input type="hidden" name="id_reacondicionado" value="{$reacondicionados}">
             <input type="text" placeholder="Marca" name="marca" id="marca">
