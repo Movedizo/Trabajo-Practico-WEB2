@@ -42,6 +42,7 @@ class ComentsModel{
         $query->execute(array($idComent));
     }
 
+
 }
 
 ?>

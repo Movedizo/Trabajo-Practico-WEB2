@@ -60,7 +60,13 @@
         <label class="form-label">Comentario</label>
         <input type="text"  id="comentario" name="comentario">
         <label class="form-label">Puntaje</label>
-        <input type="text" id="puntaje" name="puntaje">
+        <select name="puntaje" id="puntaje">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        </select>
         <input type="button" id="btn-coment" value="Comentar">
         </form>
     {/if}  

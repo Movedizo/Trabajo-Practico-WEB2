@@ -1,7 +1,6 @@
 <?php
 
 require_once 'libs/Route.php';
-require_once 'Controller/ApiCelularesController.php';
 require_once 'Controller/ApiComentController.php';
 
 

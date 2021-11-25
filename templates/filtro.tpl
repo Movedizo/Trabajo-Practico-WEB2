@@ -36,7 +36,8 @@
         {/foreach}
 
     </table>
-</div>
+
+    </div>
 
 
 
