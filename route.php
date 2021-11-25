@@ -100,6 +100,9 @@
         case 'createReacondicionado':
             $reacondicionadosController->createReacondicionado();
             break;
+        case 'agregar':
+            $reacondicionadosController->verAgregar();
+            break;
         case 'verfull':
             $reacondicionadosController->verReacondicionadosFull($params[1]);
             break;
@@ -111,6 +114,12 @@
             break;
         case 'editarMarca':
             $marcasController->verEditarMarca($params[1]);
+            break;
+        case 'createMarca':
+            $marcasController->createMarca();
+            break;
+        case 'agregarMarca':
+            $marcasController->verAgregarMarca();
             break;
         case 'updateMarca':
             $marcasController->updateMarca($params[1]);

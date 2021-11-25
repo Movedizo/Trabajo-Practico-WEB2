@@ -24,9 +24,14 @@ class MarcasModel{
 
     function createMarca($marca, $sistemaoperativo){ 
 
-        $sentencia = $this->db->prepare('INSERT INTO marcas(marca, sistemaoperativo) VALUES( ?, ?)');
+        $sentencia = $this->db->prepare("INSERT INTO marcas (marca, sistemaoperativo) VALUES( ?, ?)");
         $sentencia->execute(array($marca, $sistemaoperativo));
         return $this->db->lastInsertId();
+    }
+
+    function verAgregarMarca()
+    {
+        $this->view->verAgregarMarca();
     }
 
     function uploadImage($image){

@@ -25,6 +25,10 @@ class MarcasView{
         $this->smarty->display('templates/editarMarca.tpl');
     }
 
+    function verAgregarMarca(){
+        $this->smarty->display('templates/agregarMarca.tpl');
+    }
+
     function verError($aviso)
     {
         $this->smarty->assign('aviso', $aviso);
@@ -33,8 +37,7 @@ class MarcasView{
 
     function alertaDeleteReacondicionados($aviso)
     {
-        $this->smarty->assign('aviso', $aviso);
-        $this->smarty->display('templates/marcas.tpl');
+        echo ($aviso);
     }
 
     function showHomeLocation($url)

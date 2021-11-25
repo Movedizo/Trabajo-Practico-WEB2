@@ -2,8 +2,7 @@
 
 require_once "./Model/MarcasModel.php";
 require_once "./View/MarcasView.php";
-require_once "./Model/ReacondiconadosModel.php";
-require_once "./View/ReacondicionadosView.php";
+require_once "./Model/ReacondicionadoModel.php";
 require_once "./Helpers/AccesoHelper.php";
 
 
@@ -11,8 +10,8 @@ class MarcasController{
 
     private $model;
     private $view;
-    private $reacondicionadosModel;
-    private $reacondicionadosView;
+    private $reacondicionadoModel;
+    private $reacondicionadoView;
     private $accesoHelper;
 
     function __construct()
@@ -20,9 +19,8 @@ class MarcasController{
     {
         $this->accesoHelper= new AccesoHelper();
         $this->model = new MarcasModel();
+        $this->reacondicionadoModel = new ReacondicionadoModel();
         $this->view = new MarcasView();
-        $this->reacondicionadosModel = new ReacondicionadoModel();
-        $this->reacondicionadosView = new ReacondicionadoView();
     }
 
     function verMarcas()
@@ -41,15 +39,15 @@ class MarcasController{
     function deleteMarca($id)
     {
         $logueado = $this->accesoHelper->checkLoggedIn();
-        $reacondicionados = $this->reacondicionadosModel->getModelosPorMarca($id);
-        if (($logueado['rol'] == 2) && !empty($reacondicionados)){
-            $this->model->deleteMarcaFromDB($id);
-            $this->view->showHomeLocation("verMarcas");
-        } 
-        else {
-            $marca = $this->model->getMarca($id);
-            $this->view->alertaDeleteReacondicionados($reacondicionados, $marca, $id);
-            $this->view->showHomeLocation("homestart");
+        if (($logueado['rol'] == 2)){
+            $reacondicionados = $this->reacondicionadoModel->getModelosPorMarca($id);
+            if (!$reacondicionados){
+                $this->model->deleteMarcaFromDB($id);
+                $this->view->showHomeLocation("verMarcas");
+            } 
+            else {
+                $this->view->alertaDeleteReacondicionados("Esta marca tiene reacondicionados");
+            }
         }
     }
 
@@ -75,16 +73,20 @@ class MarcasController{
         } 
     }
 
-    function createMarca(){
+    function verAgregarMarca()
+    {
+        $this->view->verAgregarMarca();
+    }
+
+    function createMarca()
+    {
         $logueado = $this->accesoHelper->checkLoggedIn();
-        if (($logueado['rol'] >= 1)
-           && !empty( $_POST['marca']) && 
-            !empty ($_POST['sistemaoperativo'])){
-            $this->model->createMarca($_POST['marca'],$_POST['sistemaoperativo']);
+        if (($logueado['rol'] >= 1) && empty($_POST['id_marca']) && empty($_POST['marca']) && empty($_POST['sistemaoperativo'])){
+            $this->model->createMarca($_POST ['id_marca'], $_POST['marca'], $_POST['sistemaoperativo']);
             $this->view->showHomeLocation("verMarcas");        
         }
         else {
-          $this->view->verError("Faltan datos");
+          $this->view->alertaDeleteReacondicionados("No se pudo crear la marca");
         }  
     }   
 }
